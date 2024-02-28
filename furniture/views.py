@@ -1,19 +1,22 @@
-from django.shortcuts import render
-from .forms import checkoutForm
+from django.shortcuts import render, redirect
+from .forms import CheckoutForm
 
 
 def main(request):
-
     return render(request, 'main.html')
 
 
 def cart_view(request):
-    # order_id =
-    forms = checkoutForm()
+    forms = CheckoutForm()
     if request.method == 'POST':
-        forms = checkoutForm(request.POST)
+        forms = CheckoutForm(request.POST)
+        print("ddddddddddddddddddddd")
+        print(forms.is_valid())
         if forms.is_valid():
+            print(forms.cleaned_data)
             forms.save()
+            return redirect('cart')
+
 
 
     return render(request, 'cart.html', context={'forms': forms})
@@ -23,10 +26,8 @@ def cart_view(request):
     #     name = request.POST['name']
 
 
-
 def category_view(request):
     return render(request, 'category.html')
-
 
 #
 # def cart_view_view(request):

@@ -8,36 +8,35 @@
     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'bootstrap-icons/font/bootstrap-icons.css' %}">
     <link rel="stylesheet" href="{% static 'main/css/base.css' %}">
-    
+
     {% block extra_css %}
-    	
+
     {% endblock %}
 
 
 </head>
 <body>
 
-    {% include 'layouts/navbar.html' %}
+{% include 'layouts/navbar.html' %}
 
 
+<section style="min-height: 80vh">
     {% block content %}
-    	
+
     {% endblock %}
 
+</section>
 
 
+{% include 'layouts/footer.html' %}
 
 
+<script src="{% static 'bootstrap/js/bootstrap.bundle.js' %}"></script>
+<script src="{% static 'main/js/base.js' %}"></script>
+{% block extra_js %}
 
-    {% include 'layouts/footer.html' %}
-    
-    
-    <script src="{% static 'bootstrap/js/bootstrap.bundle.js' %}"></script>
-    <script src="{% static 'main/js/base.js' %}"></script>
-    {% block extra_js %}
-    	
-    {% endblock %}
-        
+{% endblock %}
+
 
 </body>
 </html>

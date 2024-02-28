@@ -7,9 +7,15 @@ import phonenumbers
 
 
 def validate_phone_number(value):
-    num = phonenumbers.parse(str(value))
-    if not phonenumbers.is_valid_number(num):
-        raise ValidationError('The phone number is not correct ! Please try again.')
+    if value.startswith('+'):
+        num = phonenumbers.parse(str(value), region="UZ")
+        if not phonenumbers.is_valid_number(num):
+            raise ValidationError(
+                f' The length of your number should be 13, but the length of your number is {len(value)}')
+    else:
+
+        raise ValidationError(
+            f' put your number + at the beginning')
 
 
 def full_name(value):

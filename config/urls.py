@@ -24,7 +24,7 @@ from django.conf.urls import handler404
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('furniture.urls')),
-    path('api/', include('api.urls'))
+    # path('api/', include('api.urls'))
 
 ]
 
