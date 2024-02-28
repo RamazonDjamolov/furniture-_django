@@ -1,0 +1,28 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'main/css/cart.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+
+
+        <form action="{% url 'cart' %}" method="post"> {% csrf_token %}
+
+            <input type="text" name="full_name" placeholder="full name ">
+            <input type="text" naem="phone_number" placeholder="+99899 197 71 89">
+            <input type="email" naem="email" placeholder="exam@gamil.com">
+            <input type="text" naem="adress" placeholder="city street home homu_number ">
+
+            <button type="submit">
+                chekout
+            </button>
+
+        </form>
+
+    </div>
+
+
+{% endblock %}
