@@ -1,6 +1,171 @@
-*{
+* {
   margin: 0;
   text-decoration: none;
   box-sizing: border-box;
 
 }
+
+.body {
+  width: 100%;
+  height: 100%;
+  min-height: 90vh;
+  background-color: #4d5154;
+
+  .cart-container {
+    width: 1200px;
+    background-color: white;
+
+    .cart {
+      width: 100%;
+      margin-bottom: 30px;
+
+      .block1 {
+        display: flex;
+        justify-content: space-between;
+        padding: 20px;
+
+        .block_right {
+          width: 500px;
+          display: flex;
+          gap: 0px 30px;
+
+          .img-cart {
+            max-width: 200px;
+            width: 800px;
+            height: 100%;
+          }
+        }
+
+        .delete-btn {
+          text-decoration: none;
+          color: black;
+          animation: rotate 3s infinite;
+
+          i {
+            font-size: 30px;
+          }
+
+
+
+          @keyframes rotate {
+            0% {
+              transform: rotate(0deg);
+            }
+            100% {
+              transform: rotate(360deg);
+            }
+          }
+
+
+        }
+
+
+      }
+    }
+
+    .block2 {
+      display: flex;
+      justify-content: space-between;
+      padding: 0px 20px 20px;
+
+
+      input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      input[type=number] {
+        -moz-appearance: textfield;
+      }
+
+      .counter {
+        width: 122px;
+        height: 46px;
+        display: flex;
+        background-color: grey;
+        justify-content: space-evenly;
+      }
+
+      .block_left2 {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 46.6px;
+
+        p {
+          margin-bottom: 0px;
+        }
+
+      }
+
+      .counter-input {
+        width: 23px;
+        border: none;
+        outline: none;
+        background-color: grey;
+        text-align: start;
+
+      }
+
+
+      .counter-btn {
+        background-color: grey;
+        outline: none;
+        border: none;
+        cursor: pointer;
+        color: #cac6da;
+        font-size: 16px;
+      }
+
+
+    }
+
+
+  }
+
+
+  .checkout-container {
+    background-color: white;
+    width: 1200px;
+    padding: 0px 50px;
+
+    h1 {
+      font-size: 35px;
+    }
+
+    .d-flex {
+      display: flex;
+      gap: 60px;
+      form {
+        width: 700px;
+
+        button {
+          width: 300px;
+          padding: 10px 40px;
+          text-align: center;
+          background-color: #404040;;
+          color: #fff;
+          text-decoration: none;
+          border-radius: 0px;
+          cursor: pointer;
+          text-align: center;
+          border-radius: 6px;
+          border: none;
+
+          transition: 0.7s ease;
+
+          &:hover {
+            background-color: black;
+          }
+
+        }
+      }
+
+      .checkot {
+      }
+    }
+
+  }
+}
+

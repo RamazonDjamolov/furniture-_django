@@ -22,12 +22,10 @@
   padding: 5px 50px;
   font-size: 50px;
   transition: ackground-image 1.5s ease-in; /* Specify the transition property */
-}
-
-.button-63:hover {
+  &:hover {
   background-image: linear-gradient(144deg, #1cd080, yellow, #00DDEB);
 }
-
+}
 
 //my cart
 
@@ -432,7 +430,9 @@
 
     }
 
-//shiping
+
+
+
 
 
 //iframe

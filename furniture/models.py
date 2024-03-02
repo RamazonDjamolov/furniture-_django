@@ -1,5 +1,6 @@
 from datetime import timezone
 
+from ckeditor_uploader.fields import RichTextUploadingField
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.core.exceptions import ValidationError
@@ -38,16 +39,22 @@ class img(models.Model):
     img = models.ImageField(upload_to='furniture')
 
 
+class ColorModel(models.Model):
+    code = models.CharField(max_length=60, verbose_name=_('name'))
+
+
 class Poduct(models.Model):
     name = models.CharField(max_length=300)
-    img = models.ManyToManyField(img)
-    description = models.TextField()
+    description = RichTextUploadingField(verbose_name='description')
     height = models.DecimalField(max_digits=5, decimal_places=2)
     length = models.DecimalField(max_digits=5, decimal_places=2)
     width = models.DecimalField(max_digits=5, decimal_places=2)
-    price = models.DecimalField(max_digits=1000, decimal_places=10)
-    sale_price = models.DecimalField(max_digits=3, decimal_places=1)
+    price = models.DecimalField(max_digits=1000, decimal_places=10, verbose_name='price')
+    sale_price = models.DecimalField(max_digits=3, decimal_places=1, verbose_name='sale_price')
     real_price = models.DecimalField(max_digits=1000, decimal_places=10)
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='category')
+    img = models.ManyToManyField(img, verbose_name='product_img')
+    color = models.ForeignKey(ColorModel, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='color')
     created_at = models.DateTimeField(auto_now_add=True)
 
 

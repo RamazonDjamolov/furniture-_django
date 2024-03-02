@@ -1,5 +1,8 @@
 from django.shortcuts import render, redirect
 from .forms import CheckoutForm
+from django.core.mail import send_mail
+from django.conf import settings
+from django.http import HttpResponse
 
 
 def main(request):
@@ -10,14 +13,21 @@ def cart_view(request):
     forms = CheckoutForm()
     if request.method == 'POST':
         forms = CheckoutForm(request.POST)
-        print("ddddddddddddddddddddd")
         print(forms.is_valid())
         if forms.is_valid():
-            print(forms.cleaned_data)
+            email = forms.cleaned_data['email']
+            message = "vash zakazniy nomer 101010"
+
+            send_mail(
+                'Company Ziyo Nur',
+                message,
+                'settings.EMAIL_HOST_USER',
+                [email],
+                fail_silently=False
+
+            )
             forms.save()
             return redirect('cart')
-
-
 
     return render(request, 'cart.html', context={'forms': forms})
 

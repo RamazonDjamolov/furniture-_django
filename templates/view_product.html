@@ -1,0 +1,115 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+            integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+    />
+
+
+
+    <link rel="stylesheet" href="{% static 'main/css/main.css' %}"/>
+
+    <link rel="stylesheet" href="{% static 'main/css/view_product.css' %}">
+{% endblock %}
+
+
+
+
+{% block content %}
+    <div class="small-container single-product mt-100">
+        <!--<h2 class="title" >Featured Products</h2>-->
+        <div class="row">
+            <div class="col-2">
+
+                <img class="mb-2" src="{{ products.image.all.1.image.url }}" width="100%" id="productImg"/>
+
+
+                <div class="small-img-row">
+                    {% for product in products.image.all %}
+                        <div class="small-img-col">
+                            <img src="{{ product.image.url }}" width="100%" class="small-img small-img-view-product"/>
+                        </div>
+                    {% endfor %}
+
+
+                </div>
+            </div>
+
+            <div class="col-2">
+                <h1>{{ products.name }}</h1>
+                <h4>{{ products.price }}$</h4>
+
+                <form action="{% url 'detail_product:add_to_cart2' products.id %}" method="post">
+                    {% csrf_token %}
+
+                    <input class="mt-3" type="number" values="1" min="1" name="quantity"/>
+                    <button type="submit" class="btn btn-outline-danger">
+                        <i class="bi bi-cart-plus-fill " style="color: red"></i> add to cart
+                    </button>
+
+                </form>
+                <h3>Product Details <i class="fa fa-indent"></i></h3>
+                <br/>
+                <p>
+                    It is a long established fact that a reader will be distracted by
+                    the readable content of a page when looking at its layout. The point
+                    of using Lorem Ipsum is that it has a more-or-less normal
+                    distribution of letters, as opposed to using 'Content here, content
+                    here', making it look like readable English.
+                </p>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- start footer -->
+
+
+    <!-----------------------------------js for toggle menu----------------------------------------------->
+    <script>
+        var menuItems = document.getElementById("MenuItems");
+
+        MenuItems.style.maxHeight = "0px";
+
+        function menutoggle() {
+            if (MenuItems.style.maxHeight == "0px") {
+                MenuItems.style.maxHeight = "200px";
+            } else {
+                MenuItems.style.maxHeight = "0px";
+            }
+        }
+    </script>
+
+    <!-----------------------js for product gallery-------------------->
+
+    <script>
+        var productImg = document.getElementById("productImg");
+        var smallImg = document.getElementsByClassName("small-img");
+
+        smallImg[0].onclick = function () {
+            productImg.src = smallImg[0].src;
+        };
+        smallImg[1].onclick = function () {
+            productImg.src = smallImg[1].src;
+        };
+        smallImg[2].onclick = function () {
+            productImg.src = smallImg[2].src;
+        };
+        smallImg[3].onclick = function () {
+            productImg.src = smallImg[3].src;
+        };
+        smallImg[4].onclick = function () {
+            productImg.src = smallImg[4].src;
+        };
+        smallImg[5].onclick = function () {
+            productImg.src = smallImg[5].src;
+        };
+    </script>
+{% endblock %}
+
+

@@ -29,6 +29,7 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -37,13 +38,15 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
-    'address',
     "crispy_forms",
     "crispy_bootstrap5",
+    "ckeditor",
 
     'furniture',
     # 'api'
 ]
+
+CKEDITOR_UPLOAD_PATH = "uploads/"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -133,6 +136,17 @@ MEDIA_ROOT = 'media'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# SMTP sozlamalari
+EMAIL_HOST = 'smtp.gmail.com'  # SMTP server manzili
+EMAIL_HOST_USER = 'djamolovramazon90@gmail.com'  # Sizning email manzilingiz
+EMAIL_HOST_PASSWORD = 'iqusoejxdruiwktg'  # Sizning email parolingiz
+EMAIL_PORT = 587      # SMTP porti (masalan, 587 yoki 25)
+EMAIL_USE_TLS = True  # TLS ni ishlatish
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+
+
 
 
 

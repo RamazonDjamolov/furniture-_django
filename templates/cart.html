@@ -1,5 +1,5 @@
 {% extends 'layouts/base.html' %}
-{% load crispy_forms_tags %}
+{% load crispy_forms_filters %}
 {% load static %}
 
 {% block extra_css %}
@@ -7,19 +7,78 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container">
+    <div class="body">
+        <div class="container">
+
+            <div class="cart-container">
+                <div class="cart">
+                    <div class="block1">
+                        <div class="block_right">
+                            <div class="">
+                                <img src="{% static 'main/img/car3.jpg' %}" alt="" class="img-cart"/>
+                            </div>
+
+                            <div class="text">
+                                <h3>name : Lorem ipsum dolor sit</h3>
+
+                                <p>
+                                    description: Lorem ipsum dolor sit amet consectetur,
+                                    adipisicing elit. Commodi, quas.
+                                </p>
+
+                                <h2>price: 85$</h2>
+                            </div>
+                        </div>
+
+                        <div class="block_left">
+                            <a href="" class="delete-btn"> delete <i class="bi bi-x"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="block2">
+                        <div class="block_right">
+                            <form action="" class="counter">
+                                <button type="submit" class="counter-btn">-</button>
+                                <input type="number" class="counter-input" max="99" min="0" value=""/>
+                                <button type="submit" class="counter-btn">+</button>
+                            </form>
+                        </div>
+
+                        <div class="block_left2">
+                            <p class="to_pr_price">total price: 170$</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
 
 
-        <form action="{% url 'cart' %}" method="post"> {% csrf_token %}
-{#            {% crispy forms %}#}
-            {{ forms|crispy }}
+            <div class="checkout-container">
+                <h1> Заполните информацию о себе </h1>
+                <div class="d-flex">
+                    <form action="{% url 'cart' %}" method="post"> {% csrf_token %}
 
-            <button type="submit">
-                chekout
-            </button>
+                        {{ forms|crispy }}
 
-        </form>
 
+                        <button type="submit">
+                            chekout
+                        </button>
+
+                    </form>
+
+                    <div class="checkot ">
+                        <span>Скидка: <h4>1 468 800сум</h4> </span>
+                        <hr>
+                        <p>Итого total count товар на сумму</p>
+                        <h4>total summa </h4>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
     </div>
 
 
