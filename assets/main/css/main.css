@@ -1,21 +1,22 @@
 .carousel-item img {
   width: 100%;
-  height: auto;
+  height: 780px;
   object-position: 70% 10%;
+  position: sticky;
 }
 
 .button-63 {
   border: 0;
   border-radius: 8px;
-  background-image: linear-gradient(144deg, #AF40FF, #5B42F3 50%, #00DDEB);
-  box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
-  min-width: 140px;
-  padding: 5px 50px;
-  font-size: 50px;
-  transition: ackground-image 1.5s ease-in; /* Specify the transition property */
+  background-color: red;
+  padding: 15px 40px;
+  transition: background-color 0.5s ease;
+  font-size: 20px;
 }
 .button-63:hover {
-  background-image: linear-gradient(144deg, #1cd080, yellow, #00DDEB);
+  background-color: black;
+  color: red;
+  border: 2px solid red;
 }
 
 .container {
@@ -309,6 +310,34 @@
     text-decoration: none;
   }
 }
+.interyer .interyer-img {
+  position: relative;
+  height: 400px;
+  overflow: hidden;
+  border: none;
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+.interyer .interyer-img img {
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  transition: 0.5s ease-out;
+  box-sizing: border-box;
+}
+.interyer .interyer-img img:hover {
+  transform: scale(1.05);
+  filter: brightness(0.7);
+}
+.interyer .interyer-img img:hover .center__hehe {
+  opacity: 1;
+}
+
+.ustunlig-img {
+  width: 100px;
+  height: 100px;
+}
+
 .iframe {
   width: 100%;
   height: 500px;

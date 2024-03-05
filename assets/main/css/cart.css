@@ -97,9 +97,15 @@
   background-color: white;
   width: 1200px;
   padding: 0px 50px;
+  height: 700px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 .body .checkout-container h1 {
   font-size: 35px;
+  margin-bottom: 100px;
 }
 .body .checkout-container .d-flex {
   display: flex;

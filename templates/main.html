@@ -21,19 +21,18 @@
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <a href="">
-                    <img src="{% static 'main/img/car1.jpg' %}" class="d-block w-100" alt="...">
+                    <img src="{% static 'main/img/carusel.jpg' %}" alt="">
 
                 </a>
             </div>
-            <div class="carousel-item ">
-                <a href="">
-                    <img src="{% static 'main/img/car2.jpg' %}" class="d-block w-100" alt="...">
-
+            <div class=" carousel-item ">
+                <a hrf="">
+                    <img src="{% static 'main/img/carusel2.jpg' %}" alt="">
                 </a>
             </div>
             <div class="carousel-item">
                 <a href="">
-                    <img src="{% static 'main/img/car3.jpg' %}" class="d-block w-100" alt="...">
+                    <img src="{% static 'main/img/carusel3.jpg' %}" alt="">
 
                 </a>
             </div>
@@ -85,7 +84,7 @@
             <div class="cart-container">
                 <div class="my-cart">
                     <div class="img">
-                        <img src="./img/img-efect1.jpg" alt="">
+                        <img src="{% static 'main/img/car2.jpg' %}" alt="">
                     </div>
 
                     <div class="pr-title">
@@ -104,10 +103,11 @@
                     </div>
                 </div>
             </div>
+
             <div class="cart-container">
                 <div class="my-cart">
                     <div class="img">
-                        <img src="./img/img-efect1.jpg" alt="">
+                        <img src="{% static 'main/img/car2.jpg' %}" alt="">
                     </div>
 
                     <div class="pr-title">
@@ -126,10 +126,11 @@
                     </div>
                 </div>
             </div>
+
             <div class="cart-container">
                 <div class="my-cart">
                     <div class="img">
-                        <img src="./img/img-efect1.jpg" alt="">
+                        <img src="{% static 'main/img/car2.jpg' %}" alt="">
                     </div>
 
                     <div class="pr-title">
@@ -166,17 +167,145 @@
 
 
 
+    {#     interyerlar #}
+
+    <div class="container">
+        <div class="row  interyer">
+            <h1 class="ms-5">Interior inspiration</h1>
+            <p class="ms-5 text-secondary">Create an inviting space for yourself and family</p>
 
 
-
-
-
-    <div class="iframe">
-        <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3007.2782283296633!2d69.32644918135593!3d41.08476719620206!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38ae43c9cbbbb4e1%3A0x36bf48d27528ff2c!2sYumshoq%20mebel!5e0!3m2!1sru!2s!4v1708267827002!5m2!1sru!2s"></iframe>
-
-
+            <div class="col-xl-8  col-md-12 interyer-img ">
+                <a href="#">
+                    <img src="{% static 'main/img/box-1.jpg' %}" alt="" class="w-100">
+                </a>
+                <button class="center__hehe">
+                    hover
+                </button>
+            </div>
+            <div class="col-xl-4  interyer-img">
+                <a href="">
+                    <img src="{% static 'main/img/box-2 .jpg' %}" alt="" class="w-100">
+                </a>
+                <div class="midle">
+                    <div class="text">
+                        <a href="">
+                            Traditional looks
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 interyer-img">
+                <a href="">
+                    <img src="{% static 'main/img/box-3.jpg' %}" alt="" class="w-100">
+                </a>
+            </div>
+            <div class="col-xl-4 interyer-img">
+                <a href="">
+                    <img src="{% static 'main/img/box-4.jpg' %}" alt="" class="w-100">
+                </a>
+                <div class="midle">
+                    <div class="text">
+                        <a href="">
+                            Compact living
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 interyer-img">
+                <a href="">
+                    <img src="{% static 'main/img/box-5.jpg' %}" alt="" class="w-100">
+                </a>
+                <div class="midle">
+                    <div class="text">
+                        <a href="">
+                            Classic design
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
+
+
+
+    {#    <section class="container">#}
+    {#        <div class="sale">#}
+    {#            <div class="block">#}
+    {#                <div class="block-img">#}
+    {#                    <a href="">#}
+    {#                        <img src="{% static 'main/img/car1.jpg' %}" alt="">#}
+    {#                    </a>#}
+    {#                </div>#}
+    {#                <img src="{% static 'main/img/-20%.png' %}" alt="">#}
+    {##}
+    {#            </div>#}
+    {##}
+    {#            <div class="block2">#}
+    {#                <div class="block-img">#}
+    {#                    <a href="">#}
+    {#                        <img src="{% static 'main/img/car1.jpg' %}" alt="">#}
+    {#                    </a>#}
+    {#                </div>#}
+    {##}
+    {#                <img src="{% static 'main/img/-20%.png' %}" alt="">#}
+    {##}
+    {#            </div>#}
+    {##}
+    {#        </div>#}
+    {#    </section>#}
+
+
+
+    <section class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-md-6 col-lg-4 block_about_us">
+                <div class="icon text-center mb-5">
+                    <img src="{% static 'main/img/clock-regular.svg' %}" class="ustunlig-img" alt="">
+
+                </div>
+                <h3 class="mb-5 text-center">365-DAY HOME TRIAL</h3>
+                <p class="p">Our unique return policy will allow you to return furniture for almost a year</p>
+
+
+            </div>
+
+
+            <div class="col-md-6 col-lg-4">
+                <div class="icon text-center mb-5">
+                    <img src="{% static 'main/img/truck-solid.svg' %}" class="ustunlig-img" alt="">
+
+                </div>
+                <h3 class="mb-5 text-center">FREE SHIPPING AND DELIVERY</h3>
+                <p class="mb-5">We're one of the few furniture online retailers, who offer delivery free of charge</p>
+
+
+            </div>
+
+
+            <div class="col-md-6 col-lg-4">
+                <div class="icon text-center mb-5">
+                    <img src="{% static 'main/img/medal-solid.svg' %}" class="ustunlig-img" alt="">
+                </div>
+                <h3 class="mb-5 text-center">LIFETIME WARRANTY</h3>
+                <p class="mb-5">Purchasing furniture at Quali comes with longer warranty than anyone else offers!</p>
+
+
+            </div>
+        </div>
+    </section>
+
+
+
+    <div class="iframe ">
+
+        <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2921.128331695446!2d69.32488028689725!3d41.084855060311384!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38ae43c9cbbbb4e1%3A0x36bf48d27528ff2c!2sYumshoq%20mebel!5e1!3m2!1sru!2s!4v1709488197829!5m2!1sru!2s"></iframe>
+    </div>
+
+
+
 
 
 {% endblock %}

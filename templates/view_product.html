@@ -12,7 +12,6 @@
 
 
 
-    <link rel="stylesheet" href="{% static 'main/css/main.css' %}"/>
 
     <link rel="stylesheet" href="{% static 'main/css/view_product.css' %}">
 {% endblock %}
@@ -24,27 +23,34 @@
     <div class="small-container single-product mt-100">
         <!--<h2 class="title" >Featured Products</h2>-->
         <div class="row">
+
             <div class="col-2">
 
-                <img class="mb-2" src="{{ products.image.all.1.image.url }}" width="100%" id="productImg"/>
+                <img class="mb-2" src="{{ products.img.first.img.url }}" width="100%" id="productImg" alt="img"/>
 
 
-                <div class="small-img-row">
-                    {% for product in products.image.all %}
-                        <div class="small-img-col">
-                            <img src="{{ product.image.url }}" width="100%" class="small-img small-img-view-product"/>
-                        </div>
-                    {% endfor %}
+                <div class="small-img-row " style="overflow-x: auto">
+                    <div class="small-img-col d-flex gap-3 ">
+
+
+                        {% for product in  products.img.all %}
+
+                            <img src="{{ product.img.url }}" width="100%"
+                                 class="small-img small-img-view-product " alt="img"/>
+                        {% endfor %}
+
+
+                    </div>
 
 
                 </div>
             </div>
 
             <div class="col-2">
-                <h1>{{ products.name }}</h1>
-                <h4>{{ products.price }}$</h4>
+                <h1>name</h1>
+                <h4>800$</h4>
 
-                <form action="{% url 'detail_product:add_to_cart2' products.id %}" method="post">
+                <form action="" method="post">
                     {% csrf_token %}
 
                     <input class="mt-3" type="number" values="1" min="1" name="quantity"/>

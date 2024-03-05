@@ -55,10 +55,7 @@ a {
 
 .social-link > a .instagram {
     font-size: 30px;
-    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
-    color: #fff;
-    margin: 10px;
-    border-radius: 20%;
+
 
 
 }
@@ -214,23 +211,20 @@ a {
     gap: 0 30px;
 }
 
-.footer .facebook {
+.footer .telephone {
     border-radius: 100%;
     font-size: 2rem;
     background-color: transparent;
     transition: 0.5s ease;
 }
 
-.footer .facebook:hover {
-    color: #415ca0;
+.footer .telephone:hover {
+    color: #65f557;
 }
 
 .footer .instagram {
     font-size: 2rem;
-    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
-    color: #fff;
-    margin: 10px;
-    border-radius: 5px;
+
 }
 
 .footer .instagram:hover {

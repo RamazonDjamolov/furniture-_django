@@ -1,6 +1,6 @@
 {% extends 'layouts/base.html' %}
 {% load static %}
-
+{% load humanize %}
 
 {% block extra_css %}
     <link rel="stylesheet" href="{% static 'main/css/category.css' %}">
@@ -13,95 +13,45 @@
         <div class="block">
 
 
-            <div class="cart-container">
-                <div class="my-cart">
-                    <div class="img">
-                        <img src="./img/img-efect1.jpg" alt="">
-                    </div>
+            {% for product in products %}
 
-                    <div class="pr-title">
-                        name
-                    </div>
 
-                    <div class="price">
-                        <p>558$</p>
-                        <del>700$</del>
-                        <span><i class="bi bi-patch-check-fill"> 20%</i> </span>
-                    </div>
 
-                    <div class="form">
-                        <a href="" class="add_tocart"> add to cart </a>
-                        <a href="" class="product-view"> view product</a>
+
+                <div class="cart-container">
+                    <div class="my-cart">
+                        <div class="img">
+                            {% for img in product.img.all %}
+                                <img src="{{img.img.url}}" alt="">
+                            {% endfor %}
+
+                        </div>
+
+                        <div class="pr-title ps-3">
+                            {{ product.name|title }}
+                            <hr>
+                        </div>
+
+                        <div class="price ps-3">
+                            {% if product.sale_price == 0 and null %}
+                                <p>{{ product.real_price|floatformat:0|intcomma }}</p>
+
+
+                            {% else %}
+                                <p class="mt-2 text-start"> {{ product.real_price|floatformat:3|intcomma }}</p>
+
+                            {% endif %}
+
+                        </div>
+
+                        <div class="form">
+                            <a href="" class="add_tocart"> add to cart </a>
+                            <a href="{% url 'view_product' product.id %}" class="product-view"> view product</a>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="cart-container">
-                <div class="my-cart">
-                    <div class="img">
-                        <img src="./img/img-efect1.jpg" alt="">
-                    </div>
-
-                    <div class="pr-title">
-                        name
-                    </div>
-
-                    <div class="price">
-                        <p>558$</p>
-                        <del>700$</del>
-                        <span><i class="bi bi-patch-check-fill"> 20%</i> </span>
-                    </div>
-
-                    <div class="form">
-                        <a href="" class="add_tocart"> add to cart </a>
-                        <a href="" class="product-view"> view product</a>
-                    </div>
-                </div>
-            </div>
-            <div class="cart-container">
-                <div class="my-cart">
-                    <div class="img">
-                        <img src="./img/img-efect1.jpg" alt="">
-                    </div>
-
-                    <div class="pr-title">
-                        name
-                    </div>
-
-                    <div class="price">
-                        <p>558$</p>
-                        <del>700$</del>
-                        <span><i class="bi bi-patch-check-fill"> 20%</i> </span>
-                    </div>
-
-                    <div class="form">
-                        <a href="" class="add_tocart"> add to cart </a>
-                        <a href="" class="product-view"> view product</a>
-                    </div>
-                </div>
-            </div>
-            <div class="cart-container">
-                <div class="my-cart">
-                    <div class="img">
-                        <img src="./img/img-efect1.jpg" alt="">
-                    </div>
-
-                    <div class="pr-title">
-                        name
-                    </div>
-
-                    <div class="price">
-                        <p>558$</p>
-                        <del>700$</del>
-                        <span><i class="bi bi-patch-check-fill"> 20%</i> </span>
-                    </div>
-
-                    <div class="form">
-                        <a href="" class="add_tocart"> add to cart </a>
-                        <a href="" class="product-view"> view product</a>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
 
 
         </div>

@@ -34,28 +34,59 @@ def address(value):
 class Category(models.Model):
     name = models.CharField(max_length=200)
 
+    def __str__(self):
+        return self.name
+
 
 class img(models.Model):
     img = models.ImageField(upload_to='furniture')
 
+    def __str__(self):
+        return self.img.url
 
-class ColorModel(models.Model):
-    code = models.CharField(max_length=60, verbose_name=_('name'))
 
 
-class Poduct(models.Model):
+
+
+
+class Product(models.Model):
     name = models.CharField(max_length=300)
     description = RichTextUploadingField(verbose_name='description')
-    height = models.DecimalField(max_digits=5, decimal_places=2)
-    length = models.DecimalField(max_digits=5, decimal_places=2)
-    width = models.DecimalField(max_digits=5, decimal_places=2)
-    price = models.DecimalField(max_digits=1000, decimal_places=10, verbose_name='price')
-    sale_price = models.DecimalField(max_digits=3, decimal_places=1, verbose_name='sale_price')
-    real_price = models.DecimalField(max_digits=1000, decimal_places=10)
-    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='category')
-    img = models.ManyToManyField(img, verbose_name='product_img')
-    color = models.ForeignKey(ColorModel, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='color')
+    height = models.DecimalField(max_digits=5, decimal_places=3)
+    length = models.DecimalField(max_digits=5, decimal_places=3)
+    width = models.DecimalField(max_digits=5, decimal_places=3)
+    price = models.DecimalField(max_digits=30, decimal_places=3, verbose_name='price')
+    sale_price = models.DecimalField(max_digits=30, decimal_places=3, verbose_name='sale_price', null=True, blank=True)
+    real_price = models.DecimalField(max_digits=30, decimal_places=3, null=True, blank=True)
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True, related_name='category')
+    img = models.ManyToManyField(img, related_name='product_img')
     created_at = models.DateTimeField(auto_now_add=True)
+
+
+    def __str__(self):
+        return self.name + ' ' + str(self.price)
+
+    class Meta:
+        verbose_name = 'Product'
+        verbose_name_plural = 'Products'
+        db_table = 'Product'
+
+
+class Complect_product(models.Model):
+    name = models.CharField(max_length=100)
+    price = models.DecimalField(max_digits=30, decimal_places=3)
+    sale_price = models.DecimalField(max_digits=30, decimal_places=3)
+    real_sale_price = models.DecimalField(max_digits=30, decimal_places=3)
+    product = models.ManyToManyField(Product, related_name='complect_product')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name + ' ' + self.product.name + " " + self.price
+
+    class Meta:
+        verbose_name = 'Complect_product'
+        verbose_name_plural = 'Complect_products'
+        db_table = 'Complect_product'
 
 
 class Order(models.Model):
@@ -64,8 +95,24 @@ class Order(models.Model):
     email = models.EmailField()
     adress = models.CharField(max_length=100)
 
+    def __str__(self):
+        return  self.full_name
+
+    class Meta:
+        verbose_name = 'Order'
+        verbose_name_plural = 'Orders'
+        db_table = 'Order'
+
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True, blank=True)
-    product = models.ForeignKey(Poduct, on_delete=models.SET_NULL, null=True, blank=True)
+    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True, blank=True)
     quantity = models.IntegerField()
+
+    def __str__(self):
+        return self.order.full_name + " : product -->>" + self.product.name
+
+    class Meta:
+        verbose_name = 'Order Item'
+        verbose_name_plural = 'Order Items'
+        db_table = 'Order_Item'

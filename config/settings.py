@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
 
     'rest_framework',
     "crispy_forms",
@@ -141,14 +142,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 EMAIL_HOST = 'smtp.gmail.com'  # SMTP server manzili
 EMAIL_HOST_USER = 'djamolovramazon90@gmail.com'  # Sizning email manzilingiz
 EMAIL_HOST_PASSWORD = 'iqusoejxdruiwktg'  # Sizning email parolingiz
-EMAIL_PORT = 587      # SMTP porti (masalan, 587 yoki 25)
+EMAIL_PORT = 587  # SMTP porti (masalan, 587 yoki 25)
 EMAIL_USE_TLS = True  # TLS ni ishlatish
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-
-
-
-
-
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 

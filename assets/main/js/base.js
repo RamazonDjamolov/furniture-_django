@@ -23,5 +23,11 @@ function closeSearch() {
 //     .then(response => response.json())
 //     console.log(.then(response => response.json())
 
+// document.getElementById("ckecout_btn").addEventListener('click', function () {
+//     setTimeout(function (){
+//
+//     })
+// })
+
 
 
