@@ -25,18 +25,20 @@
 
             <div class="col-2">
 
-                <img class="mb-2" src="{{ products.img.first.img.url }}" width="100%" id="productImg" alt="img"/>
+                <img class="mb-2" src="{{ products.product.first.img.first.img.url }}" width="100%" id="productImg"
+                     alt="img"/>
 
 
                 <div class="small-img-row " style="overflow-x: auto">
                     <div class="small-img-col d-flex gap-3 ">
 
-
-                        {% for product in  products.img.all %}
-
-                            <img src="{{ product.img.url }}" width="100%"
+                        {% for product in  products.product.all %}
+                            {% for img in product.img.all %}
+                                <img src="{{ img.img.url }}" width="100%"
                                  class="small-img small-img-view-product " alt="img"/>
+                            {% endfor %}
                         {% endfor %}
+
 
 
                     </div>
@@ -49,12 +51,13 @@
 
                 <h1>{{ products.name|title }}</h1>
                 <div class="price">
+{#                    <h4> {{ products.real_sale_price }}</h4>#}
 
-                    <h4 class="text-danger">{{ products.real_price|floatformat:0|intcomma }} UZS</h4>
+                    <h4 class="text-danger">{{ products.real_sale_price|floatformat:0|intcomma }} UZS</h4>
                     {% if products.sale_price == 0 or products.sale_price == None %}
-
+{##}
                     {% else %}
-                         <p>
+                        <p>
                             <del class="text-decoration-line-through text-secondary">{{ products.price|floatformat:0|intcomma }} </del>
                         </p>
                         <p>
@@ -96,11 +99,15 @@
 
             {% for product in similarproducts %}
                 <div class="cart-container">
-                    <div class="my-cart">
+                    <div class="my-cart" id="{{ product.id }}">
                         <div class="img">
-                            {% for img in product.img.all %}
-                                <img src="{{ img.img.url }}" alt="">
+
+                                                       {% for product2 in  product.product.all %}
+                                {% for img in product2.img.all %}
+                                    <img src="{{ img.img.url }}" alt="">
+                                {% endfor %}
                             {% endfor %}
+
 
                         </div>
 

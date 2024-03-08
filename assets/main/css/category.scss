@@ -10,7 +10,7 @@
 
     .cart-container {
       position: relative;
-      width: 350px;
+      width: 320px;
       height: auto;
       margin-bottom: 15px;
 
@@ -50,7 +50,7 @@
 
         img {
           width: 100%;
-          height: auto;
+          height: 250px;
           border-radius: 10px;
           border-bottom-left-radius: 0px;
           border-bottom-right-radius: 0px;
@@ -59,6 +59,7 @@
       }
 
       .price {
+        margin-top: 10px;
         display: flex;
         justify-content: space-between;
         align-items: start;
@@ -305,7 +306,7 @@
 
       .cart-container {
         position: relative;
-        width: 300px;
+        width: 280px;
         height: auto;
         margin-bottom: 15px;
       }
@@ -326,7 +327,7 @@
 
           img {
             width: 100%;
-            height: auto;
+            height: 250px;
             border-radius: 10px;
           }
         }
@@ -358,33 +359,41 @@
           justify-content: space-around;
           align-items: center;
           flex-direction: column;
-          visibility: visible;
-          height: auto;
-          width: 100%;
+          visibility: hidden;
+          height: 0;
+          width: 0;
 
-          .add_tocart {
+          form {
+            width: 100%;
+            display: flex;
+            //align-items: center;
+            //justify-content: center;
 
-            width: 80%;
-            margin: 0 auto;
-            padding: 10px 20px;
-            background-color: #404040;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 0px;
-            border: none;
-            cursor: pointer;
-            text-align: center;
-            margin-bottom: 10px;
+            .add_tocart{
+              width: 80%;
+              margin: 0 auto;
+              padding: 10px 20px;
+              background-color: #404040;
+              color: #fff;
+              text-decoration: none;
+              border-radius: 0px;
+              border: none;
+              cursor: pointer;
+              text-align: center;
+              margin-bottom: 10px;
 
-            &:hover {
-              transition: 0.90s ease;
+              &:hover {
+                transition: 0.90s ease;
 
-              background-color: black;
+                background-color: black;
 
+
+              }
 
             }
 
           }
+
 
           .product-view {
             width: 80%;

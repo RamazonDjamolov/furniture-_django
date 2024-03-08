@@ -310,27 +310,34 @@
     text-decoration: none;
   }
 }
-.interyer .interyer-img {
-  position: relative;
-  height: 400px;
-  overflow: hidden;
-  border: none;
-  border-radius: 20px;
-  margin-bottom: 20px;
-}
-.interyer .interyer-img img {
+.hoverable__img {
   width: 100%;
-  height: 100%;
-  border-radius: 20px;
   transition: 0.5s ease-out;
-  box-sizing: border-box;
 }
-.interyer .interyer-img img:hover {
-  transform: scale(1.05);
+
+.hoverable {
+  width: auto;
+  position: relative;
+}
+.hoverable img {
+  width: 100%;
+}
+.hoverable:hover .hover__btn {
+  opacity: 1;
+}
+.hoverable:hover:hover img {
+  transform: scale(1.1);
   filter: brightness(0.7);
 }
-.interyer .interyer-img img:hover .center__hehe {
-  opacity: 1;
+
+.hover__btn {
+  opacity: 0;
+  width: 80px;
+  aspect-ratio: 2/1;
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  transition: 0.5s ease-out;
 }
 
 .ustunlig-img {

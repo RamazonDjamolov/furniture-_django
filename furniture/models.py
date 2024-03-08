@@ -81,7 +81,7 @@ class Complect_product(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.name + ' ' + self.product.name + " " + self.price
+        return self.name
 
     class Meta:
         verbose_name = 'Complect_product'

@@ -20,7 +20,7 @@
 
         <div class="icons">
             <a href="#" id="search-icon"><i class="bi bi-search"></i></a>
-            <a href="{% url 'cart' %}"><i class="bi bi-cart-fill"> 111</i></a>
+            <a href="{% url 'cart' %}"><i class="bi bi-cart-fill"> {{ total_item }}</i></a>
         </div>
     </div>
     <form action="" class="search-container" id="search-container">
@@ -45,8 +45,14 @@
                     <a class="nav-link " href="{% url 'main' %}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href="{% url 'category' %}">hamma tovarlar</a>
+                    <a class="nav-link " href="{% url 'category' %}">Hamma Tovarlar</a>
                 </li>
+
+                <li class="nav-item">
+                    <a class="nav-link " href="{% url 'toplam'%}">To'plam </a>
+                </li>
+
+
 
 
 
