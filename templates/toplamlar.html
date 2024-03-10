@@ -43,7 +43,7 @@
 
 
                             <form class="w-100  d-flex justify-content-center align-items-center"
-                                  action="{% url 'add' product.id %}" method="post">
+                                  action="{% url 'add_to_cart_toplam' product.id %}" method="post">
                                 {% csrf_token %}
                                 <input type="text" hidden="hidden" value="{{ request.path }}#{{ product.id }}"
                                        name='next'>

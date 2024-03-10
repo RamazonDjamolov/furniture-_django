@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     "ckeditor",
 
     'furniture',
-    # 'api'
+    
+
 ]
 
 CKEDITOR_UPLOAD_PATH = "uploads/"

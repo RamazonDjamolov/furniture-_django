@@ -1,6 +1,7 @@
 {% extends 'layouts/base.html' %}
 {% load crispy_forms_filters %}
 {% load static %}
+{% load humanize %}
 
 {% block extra_css %}
     <link rel="stylesheet" href="{% static 'main/css/cart.css' %}">
@@ -10,47 +11,93 @@
     <div class="body  pt-5 pb-5">
         <div class="container">
 
-            <div class="cart-container">
-                <div class="cart">
-                    <div class="block1">
-                        <div class="block_right">
-                            <div class="">
-                                <img src="{% static 'main/img/car3.jpg' %}" alt="" class="img-cart"/>
+            {% for product in products %}
+                <div class="cart-container"
+                     id="{% if product.0.img.first.img.url  == None %}komplekt{{ product.0.id }}{% else %}{{ product.0.id }}{% endif %}">
+                    <div class="cart">
+                        <div class="block1">
+                            <div class="block_right">
+                                <div class="">
+                                    {% if product.0.img.first.img.url  == None %}
+                                        <a href="{% url 'toplam_view_pr' product.0.id %}">
+                                            <img src="{{ product.0.product.first.img.first.img.url }}" alt=""
+                                                 class="img-cart">
+                                        </a>
+                                    {% else %}
+                                        <a href="{% url 'view_product' product.0.id %}">
+                                            <img src="{{ product.0.img.first.img.url }}" alt="" class="img-cart">
+                                        </a>
+                                    {% endif %}
+
+                                </div>
+
+                                <div class="text">
+                                    <h3>{{ product.0.name|title }}</h3>
+
+                                    <p>
+                                        length {{ product.0.length }} cm <br>
+                                        width {{ product.0.width }} cm <br>
+                                        height {{ product.0.height }} cm <br>
+                                    </p>
+
+                                    <h2>Price: {{ product.0.real_price|floatformat:0|intcomma }}</h2>
+                                </div>
                             </div>
 
-                            <div class="text">
-                                <h3>name : Lorem ipsum dolor sit</h3>
+                            <div class="block_left">
+                                {% if product.0.img.first.img.url  == None %}
+                                    <a href="{% url 'delete_top' product.0.id %}" class="delete-btn"> delete <i
+                                            class="bi bi-x"></i></a>
 
-                                <p>
-                                    description: Lorem ipsum dolor sit amet consectetur,
-                                    adipisicing elit. Commodi, quas.
-                                </p>
+                                {% else %}
+                                    <a href="{% url 'delete' product.0.id %}" class="delete-btn"> delete <i
+                                            class="bi bi-x"></i></a>
 
-                                <h2>price: 85$</h2>
+                                {% endif %}
+
                             </div>
                         </div>
 
-                        <div class="block_left">
-                            <a href="" class="delete-btn"> delete <i class="bi bi-x"></i></a>
+                        <div class="block2">
+                            <div class="block_right">
+                                {% if product.0.img.first.img.url  == None %}
+                                    <form action="" class="counter">
+                                        <a href="{% url 'sub_top' product.0.id %}?next={{ request.path }}"
+                                           class="counter-btn">-</a>
+
+                                        <input type="number" class="counter-input" max="99" min="1"
+                                               value="{{ product.1 }}"/>
+
+                                        <a href="{% url 'add_top'  product.0.id %}?next={{ request.path }}"
+                                           class="counter-btn">+</a>
+
+                                    </form>
+                                {% else %}
+                                    <form action="" class="counter">
+                                        <a href="{% url 'sub' product.0.id %}?next={{ request.path }}"
+                                           class="counter-btn">-</a>
+
+                                        <input type="number" class="counter-input" max="99" min="1"
+                                               value="{{ product.1 }}"/>
+
+                                        <a href="{% url 'ad'  product.0.id %}?next={{ request.path }}"
+                                           class="counter-btn">+</a>
+
+                                    </form>
+                                {% endif %}
+
+
+                            </div>
+
+                            <div class="block_left2">
+                                <p class="to_pr_price">total price: {{ product.2|floatformat:0|intcomma }}</p>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="block2">
-                        <div class="block_right">
-                            <form action="" class="counter">
-                                <button type="submit" class="counter-btn">-</button>
-                                <input type="number" class="counter-input" max="99" min="0" value=""/>
-                                <button type="submit" class="counter-btn">+</button>
-                            </form>
-                        </div>
-
-                        <div class="block_left2">
-                            <p class="to_pr_price">total price: 170$</p>
-                        </div>
-                    </div>
                 </div>
+            {% endfor %}
 
-            </div>
 
 
             <div class="checkout-container">
@@ -66,10 +113,10 @@
 
                     </form>
                     <div class="checkot ">
-                        <span>Скидка: <h4>1 468 800сум</h4> </span>
+                        <span>Скидка: <h4>{{ total_sale|floatformat:0|intcomma }} UZS</h4> </span>
                         <hr>
-                        <p>Итого total count товар на сумму</p>
-                        <h4>total summa </h4>
+                        <p>Итого {{ total_item }} товар на сумму</p>
+                        <h4>total summa <br>{{ total_price | floatformat:0|intcomma }} UZS</h4>
                     </div>
 
 

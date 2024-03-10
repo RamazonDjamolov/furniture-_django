@@ -68,6 +68,7 @@
   display: flex;
   background-color: grey;
   justify-content: space-evenly;
+  align-items: center;
 }
 .body .cart-container .block2 .block_left2 {
   display: flex;
@@ -83,7 +84,7 @@
   border: none;
   outline: none;
   background-color: grey;
-  text-align: start;
+  text-align: center;
 }
 .body .cart-container .block2 .counter-btn {
   background-color: grey;

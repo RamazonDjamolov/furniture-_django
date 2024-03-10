@@ -52,9 +52,9 @@ class img(models.Model):
 class Product(models.Model):
     name = models.CharField(max_length=300)
     description = RichTextUploadingField(verbose_name='description')
-    height = models.DecimalField(max_digits=5, decimal_places=3)
-    length = models.DecimalField(max_digits=5, decimal_places=3)
-    width = models.DecimalField(max_digits=5, decimal_places=3)
+    height = models.PositiveIntegerField(default=0)
+    length = models.PositiveIntegerField(default=0)
+    width = models.PositiveIntegerField(default=0)
     price = models.DecimalField(max_digits=30, decimal_places=3, verbose_name='price')
     sale_price = models.DecimalField(max_digits=30, decimal_places=3, verbose_name='sale_price', null=True, blank=True)
     real_price = models.DecimalField(max_digits=30, decimal_places=3, null=True, blank=True)
@@ -76,7 +76,7 @@ class Complect_product(models.Model):
     name = models.CharField(max_length=100)
     price = models.DecimalField(max_digits=30, decimal_places=3)
     sale_price = models.DecimalField(max_digits=30, decimal_places=3)
-    real_sale_price = models.DecimalField(max_digits=30, decimal_places=3)
+    real_price = models.DecimalField(max_digits=30, decimal_places=3)
     product = models.ManyToManyField(Product, related_name='complect_product')
     created_at = models.DateTimeField(auto_now_add=True)
 

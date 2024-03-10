@@ -15,7 +15,10 @@ def func_category(request):
 
 def get_total_item(request):
     cart = request.session.get('cart', {})
-    return sum(cart.values())
+    cart2 = request.session.get('cart2', {})
+    x = sum(cart.values())
+    s = sum(cart2.values())
+    return x + s
 
 
 def main(request):
@@ -55,34 +58,7 @@ def category_view(request):
     })
 
 
-# toplarga
-
-def toplam_view(request):
-    total_item = get_total_item(request)
-    obj = Complect_product.objects.all()
-    category = func_category(request)
-    return render(request, template_name='toplamlar.html', context={
-        'total_item': total_item,
-        'products': obj,
-        'category': category
-    })
-
-
-def toplam_pr_view(request, id):
-    total_item = get_total_item(request)
-    obj = Complect_product.objects.get(id=id)
-    similar = Complect_product.objects.all()[::-1]
-    category = func_category(request)
-
-    return render(request, template_name='toplarlar_pr_view.html', context={
-        'total_item': total_item,
-        'products': obj,
-        'similarproducts': similar,
-        'category': category
-    })
-
-
-#  add to cart  🛒
+#  add to cart  ++++
 
 
 def add_to_cart(request, id: int):
@@ -104,6 +80,28 @@ def add_to_cart(request, id: int):
     return redirect(x)
 
 
+#  add toplamlar
+def add_to_cart_toplam(request, id: int):
+    print(id)
+    cart2 = request.session.get('cart2', {})
+    print(cart2)
+    print(str(id) in cart2.keys())
+    if str(id) in cart2.keys():
+        cart2.pop(f"{id}")
+    else:
+        cart2[f'{id}'] = 1
+
+    request.session['cart2'] = cart2
+    print(request.session['cart2'], 'cart2')
+    x = request.POST['next']
+    try:
+        x = request.POST['next']
+    except MultiValueDictKeyError as e:
+        return redirect('/' + f'#{id}')
+    return redirect(x)
+
+
+#  view product 👁👁👁👁👁
 def view_product(request, id: int):
     category = func_category(request)
     product = Product.objects.get(id=id)
@@ -119,10 +117,57 @@ def view_product(request, id: int):
     })
 
 
-# cart view
+# toplar view 👀👀👀👀👀
+def toplam_pr_view(request, id):
+    total_item = get_total_item(request)
+    obj = Complect_product.objects.get(id=id)
+    similar = Complect_product.objects.all()[::-1]
+    category = func_category(request)
+
+    return render(request, template_name='toplarlar_pr_view.html', context={
+        'total_item': total_item,
+        'products': obj,
+        'similarproducts': similar,
+        'category': category
+    })
+
+
+#  toplarlar pagenini viewsi
+def toplam_view(request):
+    total_item = get_total_item(request)
+    obj = Complect_product.objects.all()
+    category = func_category(request)
+    return render(request, template_name='toplamlar.html', context={
+        'total_item': total_item,
+        'products': obj,
+        'category': category
+    })
+
+
+# cart view  🛒🛒🛒🛒🛒🛒🛒
 def cart_view(request):
     category = func_category(request)
     total_item = get_total_item(request)
+    cart = request.session['cart']
+    cart2 = request.session['cart2']
+    products = Product.objects.all().filter(id__in=cart.keys())
+    toplam = Complect_product.objects.all().filter(id__in=cart2.keys())
+    s = []
+    total_price = 0
+    total_sale = 0
+    for k, v in cart.items():
+        for j in products:
+            if j.id == int(k):
+                s.append((j, v, int(v) * float(j.real_price)))
+                total_price += float(v) * float(j.real_price)
+                total_sale += float(v) * float(0 if j.sale_price == None else j.sale_price)
+
+    for k, v in cart2.items():
+        for j in toplam:
+            if j.id == int(k):
+                s.append((j, v, int(v) * float(j.real_price)))
+                total_price += float(v) * float(j.real_price)
+                total_sale += float(v) * float(0 if j.sale_price == None else j.sale_price)
 
     forms = CheckoutForm()
     if request.method == 'POST':
@@ -130,23 +175,91 @@ def cart_view(request):
         print(forms.is_valid())
         if forms.is_valid():
             email = forms.cleaned_data['email']
-            message = "vash zakazniy nomer 101010"
-            # task_send_mail.delay( 'Company Ziyo Nur', message,'settings.EMAIL_HOST_USER',  [email], fail_silently=False )
-
             forms.save()
             return redirect('cart')
 
     return render(request, 'cart.html', context={
         'forms': forms,
         'category': category,
-        'total_item': total_item
+        'total_item': total_item,
+        'products': s,
+        'total_price': total_price,
+        'total_sale': total_sale
 
     })
 
-    #
-    # if request.method == 'POST':
-    #     name = request.POST['name']
 
+#  change quantity
+# def chage_quantity_cart2(request, id):
+#     cart2 = request.session.get('cart2', {})
+#     print(cart2)
+#     print(str(id) in cart2.keys())
+#     if str(id) in cart2.keys():
+#         cart2.pop(f"{id}")
+#     else:
+#         cart2[f'{id}'] = 1
 #
-# def cart_view_view(request):
-#     return render(request, 'cart.html')
+#     request.session['cart'] = cart2
+#     x = request.POST['next']
+#     try:
+#         x = request.POST['next']
+#     except MultiValueDictKeyError as e:
+#         return redirect('/' + f'#{id}')
+#     return redirect(x)
+
+
+def add(request, id):
+    x = request.GET.get('next', '/')
+    cart = request.session.get('cart', {})
+    s = cart.get(str(id))
+    print(s, "object ")
+    cart.update({str(id): s + 1})
+    request.session['cart'] = cart
+
+    return redirect(x + f'#{id}')
+
+
+def sub(request, id):
+    x = request.GET.get('next', '/')
+    cart = request.session.get('cart', {})
+
+    s = cart.get(str(id))
+    if s != 1:
+        cart.update({str(id): s - 1})
+    request.session['cart'] = cart
+    return redirect(x + f'#{id}')
+
+
+def delete(request, id):
+    cart = request.session.get('cart')
+    s = cart.pop(str(id))
+    request.session['cart'] = cart
+    return redirect('cart')
+
+
+def delete_top(request, id):
+    cart2 = request.session.get('cart2')
+    s = cart2.pop(str(id))
+    request.session['cart2'] = cart2
+    return redirect('cart')
+
+
+def add_top(request, id):
+    x = request.GET.get('next', '/')
+    cart2 = request.session.get('cart2', {})
+    s = cart2.get(str(id))
+    print(s, "object ")
+    cart2.update({str(id): s + 1})
+    request.session['cart2'] = cart2
+
+    return redirect(x + f'#komplekt{id}')
+
+
+def sub_top(request, id):
+    x = request.GET.get('next', '/')
+    cart2 = request.session.get('cart2', {})
+    s = cart2.get(str(id))
+    if s != 1:
+        cart2.update({str(id): s - 1})
+    request.session['cart2'] = cart2
+    return redirect(x + f'#komplekt{id}')
