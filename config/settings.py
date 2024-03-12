@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "crispy_bootstrap5",
     "ckeditor",
 
+
     'furniture',
     
 
@@ -147,6 +148,18 @@ EMAIL_PORT = 587  # SMTP porti (masalan, 587 yoki 25)
 EMAIL_USE_TLS = True  # TLS ni ishlatish
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
+
+
+
+
+
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 
 CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+# Celery Configuration Options
+
+
+CELERY_TIMEZONE = "Asia/Tashkent"
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_TIME_LIMIT = 30 * 60

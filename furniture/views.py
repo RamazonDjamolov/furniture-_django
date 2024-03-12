@@ -1,11 +1,27 @@
 from django.shortcuts import render, redirect
 from .forms import CheckoutForm
-from django.core.mail import send_mail
 from django.utils.datastructures import MultiValueDictKeyError
 
 from django.conf import settings
 from django.http import HttpResponse
 from .models import *
+from .tasks import send_email_task, send_email_admin_task
+
+
+def checkout(request):
+    cart = request.session.get('cart')
+    cart2 = request.session.get('cart2')
+    order = Order.objects.latest('id')
+    for k, v in cart.items():
+        oreder_item = OrderItem.objects.create(product=Product.objects.get(id=k), quantity=v, order=order).save()
+
+    for k, v in cart2.items():
+        oreder_item = OrderItem.objects.create(comlect=Complect_product.objects.get(id=k), quantity=v,
+                                               order=order).save()
+
+    request.session['cart'] = {}
+    request.session['cart2'] = {}
+    print()
 
 
 def func_category(request):
@@ -24,9 +40,11 @@ def get_total_item(request):
 def main(request):
     category = func_category(request)
     total_item = get_total_item(request)
+    prodct =Product.objects.all()[::4]
     return render(request, 'main.html', {
         'category': category,
-        'total_item': total_item
+        'total_item': total_item,
+        
     })
 
 
@@ -175,7 +193,14 @@ def cart_view(request):
         print(forms.is_valid())
         if forms.is_valid():
             email = forms.cleaned_data['email']
+            user = forms.cleaned_data['full_name']
+            phone_number = forms.cleaned_data['phone_number']
             forms.save()
+            send_email_task.delay(str(email))
+            send_email_admin_task.delay(str(user), phone_number, [i[0].name for i in s],
+                                        [i[0].img.first().img.url for i in s])
+
+            checkout(request)
             return redirect('cart')
 
     return render(request, 'cart.html', context={
@@ -187,25 +212,6 @@ def cart_view(request):
         'total_sale': total_sale
 
     })
-
-
-#  change quantity
-# def chage_quantity_cart2(request, id):
-#     cart2 = request.session.get('cart2', {})
-#     print(cart2)
-#     print(str(id) in cart2.keys())
-#     if str(id) in cart2.keys():
-#         cart2.pop(f"{id}")
-#     else:
-#         cart2[f'{id}'] = 1
-#
-#     request.session['cart'] = cart2
-#     x = request.POST['next']
-#     try:
-#         x = request.POST['next']
-#     except MultiValueDictKeyError as e:
-#         return redirect('/' + f'#{id}')
-#     return redirect(x)
 
 
 def add(request, id):

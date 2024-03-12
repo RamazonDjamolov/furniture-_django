@@ -107,10 +107,11 @@ class Order(models.Model):
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True, blank=True)
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True, blank=True)
+    comlect = models.ForeignKey(Complect_product, on_delete=models.SET_NULL, null=True, blank=True)
     quantity = models.IntegerField()
 
     def __str__(self):
-        return self.order.full_name + " : product -->>" + self.product.name
+        return self.order.full_name + " : product -->>"
 
     class Meta:
         verbose_name = 'Order Item'
