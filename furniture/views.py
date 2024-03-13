@@ -199,8 +199,14 @@ def cart_view(request):
             phone_number = forms.cleaned_data['phone_number']
             forms.save()
             send_email_task.delay(str(email))
-            send_email_admin_task.delay(str(user), phone_number, [i[0].name for i in s],
-                                        [i[0].img.first().img.url for i in s])
+            imgs = []
+            for i in s:
+                try:
+                    imgs.append(i[0].img.first().img.url)
+                except:
+                    imgs.append(i[0].product.first().img.first().img.url)
+
+            send_email_admin_task.delay(str(user), phone_number, [i[0].name for i in s], f"imgages == {imgs}" )
 
             checkout(request)
             return redirect('cart')
@@ -282,8 +288,8 @@ def search(request):
         q = request.GET.get('q', '')
         s = []
 
-        toplam = Complect_product.objects.all().filter(Q(name__icontains=q))
-        products = Product.objects.filter(Q(name__icontains=q)| Q(category__name__icontains=q))
+        toplam = Complect_product.objects.filter(Q(name__icontains=q)).all()
+        products = Product.objects.filter(Q(name__icontains=q) | Q(category__name__icontains=q)).all()
         for i in toplam:
             s.append(i)
         for i in products:

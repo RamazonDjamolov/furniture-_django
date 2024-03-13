@@ -16,7 +16,7 @@
 
 
 
-                <div class="cart-container">
+                <div class="cart-container" >
                     <div class="my-cart" id="{{ product.id }}">
                         <div class="img">
                             {% for img in product.img.all %}
@@ -28,26 +28,31 @@
                         <div class="pr-title ps-3 mt-3">
                             {{ product.name|title }}
                         </div>
-                            <hr>
+                        <hr>
 
                         <div class="price ps-3">
-                            {% if product.sale_price == 0 and null %}
+                            {% if product.sale_price == 0 or product.sale_price == None %}
                                 <p>{{ product.real_price|floatformat:0|intcomma }}</p>
 
-
                             {% else %}
-                                <p class="mt-2 text-start"> {{ product.real_price|floatformat:0|intcomma }} UZS</p>
+                                <p class=""> {{ product.real_price|floatformat:0|intcomma }} USD</p>
+                                <del>  {{ product.price }}</del>
+                                <span>
+                                <i class="bi bi-patch-check-fill text-success">{{ product.sale_price }} </i>
+                                </span>
 
                             {% endif %}
 
                         </div>
 
-                        <div class="form " >
+                        <div class="form ">
 
 
-                            <form class="w-100  d-flex justify-content-center align-items-center" action="{% url 'add' product.id %}" method="post">
+                            <form class="w-100  d-flex justify-content-center align-items-center"
+                                  action="{% url 'add' product.id %}" method="post">
                                 {% csrf_token %}
-                                <input type="text" hidden="hidden" value="{{ request.path }}#{{ product.id }}" name='next'>
+                                <input type="text" hidden="hidden" value="{{ request.path }}#{{ product.id }}"
+                                       name='next'>
                                 <button class="add_tocart ms-auto me-auto" type="submit">
                                     add to cart
                                 </button>

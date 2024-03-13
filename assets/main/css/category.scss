@@ -10,7 +10,7 @@
 
     .cart-container {
       position: relative;
-      width: 320px;
+      width: 350px;
       height: auto;
       margin-bottom: 15px;
 
@@ -59,13 +59,14 @@
       }
 
       .price {
-        margin-top: 10px;
-        display: flex;
+        mdisplay: flex;
         justify-content: space-between;
-        align-items: start;
+        align-items: center;
         margin-bottom: 20px;
+        
 
         p {
+          align-items: self-end;
           color: red;
         }
 
