@@ -6,6 +6,7 @@ from django.conf import settings
 from django.http import HttpResponse
 from .models import *
 from .tasks import send_email_task, send_email_admin_task
+from django.db.models import Q
 
 
 def checkout(request):
@@ -40,11 +41,11 @@ def get_total_item(request):
 def main(request):
     category = func_category(request)
     total_item = get_total_item(request)
-    prodct =Product.objects.all()[::4]
+    prodct = Product.objects.all()[::4]
     return render(request, 'main.html', {
         'category': category,
         'total_item': total_item,
-        
+
     })
 
 
@@ -102,7 +103,8 @@ def add_to_cart(request, id: int):
 def add_to_cart_toplam(request, id: int):
     print(id)
     cart2 = request.session.get('cart2', {})
-    print(cart2)
+    # print(cart2, "cart2")
+    # cart2.clear()
     print(str(id) in cart2.keys())
     if str(id) in cart2.keys():
         cart2.pop(f"{id}")
@@ -269,3 +271,28 @@ def sub_top(request, id):
         cart2.update({str(id): s - 1})
     request.session['cart2'] = cart2
     return redirect(x + f'#komplekt{id}')
+
+
+# search
+
+def search(request):
+    category = func_category(request)
+    total_item = get_total_item(request)
+    if request.method == "GET":
+        q = request.GET.get('q', '')
+        s = []
+
+        toplam = Complect_product.objects.all().filter(Q(name__icontains=q))
+        products = Product.objects.filter(Q(name__icontains=q)| Q(category__name__icontains=q))
+        for i in toplam:
+            s.append(i)
+        for i in products:
+            s.append(i)
+        print(s)
+
+    return render(request, template_name='search.html', context={
+        'products': s,
+        'category': category,
+        'total_item': total_item,
+
+    })

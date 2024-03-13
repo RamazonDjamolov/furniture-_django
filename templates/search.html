@@ -1,0 +1,101 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'main/css/category.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container" style="margin: 80px auto;">
+        <div class="block">
+            {% if products %}
+                {% for product in products %}
+
+                    <div class="cart-container">
+                        <div class="my-cart" id="{{ product.id }}">
+                            <div class="img">
+                                {% for img in product.img.all %}
+                                    <img src="{{ img.img.url }}" alt="">
+                                {% endfor %}
+
+                                {% for product2 in  product.product.all %}
+                                    {% for img in product2.img.all %}
+                                        <img src="{{ img.img.url }}" alt="">
+                                    {% endfor %}
+                                {% endfor %}
+                            </div>
+
+                            <div class="pr-title ps-3 mt-3">
+                                {{ product.name|title }}
+                            </div>
+                            <hr>
+
+                            <div class="price ps-3">
+                                {% if product.sale_price == 0 and null %}
+                                    <p>{{ product.real_price|floatformat:0|intcomma }}</p>
+
+
+                                {% else %}
+                                    <p class="mt-2 text-start"> {{ product.real_price|floatformat:0|intcomma }} UZS</p>
+
+                                {% endif %}
+
+                            </div>
+
+                            <div class="form ">
+
+
+                                <form class="w-100  d-flex justify-content-center align-items-center"
+                                        {% if product.img.all == None %}
+
+                                      action="{% url 'add_to_cart_toplam' product.id %}" method="post">
+                                        {% else %}
+                                            action="{% url 'add' product.id %}" method="post">
+
+                                        {% endif %}
+                                {% csrf_token %}
+
+                                <input type="text" hidden="hidden" value="{{ request.path }}#{{ product.id }}"
+                                       name='next'>
+                                <button class="add_tocart ms-auto me-auto" type="submit">
+                                    add to cart
+                                </button>
+                                </form>
+
+
+                                {#                            <a href="" class="add_tocart" >#}
+                                {#                                <i class="bi {% if check %} bi-cart-x-fill#}
+                                {#                               {% endif %} bi-cart-plus" style="color: white"> add to cart </i>#}
+                                {#                                <input type="text" hidden="hidden" value="{{ request.path }}#{{ product.id }}"#}
+                                {#                                       name='next'>#}
+                                {#                            </a>#}
+
+                                {% if product.img.all == None %}
+                                    <a href="{% url 'toplam_view_pr' product.id %}" class="product-view"> view
+                                        product</a>
+                                {% else %}
+                                    <a href="{% url 'view_product' product.id %}" class="product-view"> view product</a>
+
+                                {% endif %}
+
+                            </div>
+                        </div>
+                    </div>
+
+                {% endfor %}
+
+            {% else %} <h1> salom</h1>
+            {% endif %}
+
+
+        </div>
+
+
+    </div>
+
+
+{% endblock %}
+
+
+

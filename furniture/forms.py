@@ -1,5 +1,4 @@
 from django import forms
-from django import forms
 from phonenumbers import NumberParseException, parse as parse_phone_number
 
 from .models import *

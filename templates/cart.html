@@ -103,7 +103,8 @@
             <div class="checkout-container">
                 <h1> Заполните информацию о себе </h1>
                 <div class="d-flex">
-                    <form action="{% url 'cart' %}" id="formcha" method="post"> {% csrf_token %}
+                    <form action="{% url 'cart' %}" id="formcha" method="post">
+                        {% csrf_token %}
 
                         {{ forms|crispy }}
 

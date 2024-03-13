@@ -23,11 +23,17 @@
             <a href="{% url 'cart' %}"><i class="bi bi-cart-fill"> {{ total_item }}</i></a>
         </div>
     </div>
-    <form action="" class="search-container" id="search-container">
+    <form action="{% url 'search' %}"
+          method="get"
+          class="search-container"
+          id="search-container">
 
-        <input type="text" placeholder="Search...">
+        <input type="text"
+               placeholder="Search..."
+                name = 'q'
+               value="{{ request.GET.q }}"
+        >
         <button onclick="closeSearch()">Close</button>
-
 
     </form>
 </div>
@@ -49,7 +55,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link " href="{% url 'toplam'%}">To'plam </a>
+                    <a class="nav-link " href="{% url 'toplam' %}">To'plam </a>
                 </li>
 
 
