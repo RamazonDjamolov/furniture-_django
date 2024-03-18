@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "htmx.org": "^1.9.11",
     "sass": "^1.71.1"
   }
 }

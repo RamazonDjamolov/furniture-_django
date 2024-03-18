@@ -37,7 +37,7 @@
 
 
                                 {% else %}
-                                    <p class="mt-2 text-start"> {{ product.real_price|floatformat:0|intcomma }} UZS</p>
+                                    <p class="mt-2 text-start"> {{ product.real_price|floatformat:0|intcomma }} USD</p>
 
                                 {% endif %}
 
@@ -59,7 +59,7 @@
                                 <input type="text" hidden="hidden" value="{{ request.path }}#{{ product.id }}"
                                        name='next'>
                                 <button class="add_tocart ms-auto me-auto" type="submit">
-                                    add to cart
+                                    Savatga
                                 </button>
                                 </form>
 
@@ -72,10 +72,11 @@
                                 {#                            </a>#}
 
                                 {% if product.img.all == None %}
-                                    <a href="{% url 'toplam_view_pr' product.id %}" class="product-view"> view
-                                        product</a>
+                                    <a href="{% url 'toplam_view_pr' product.id %}" class="product-view"> v Mahsulotni
+                                        ko'rish</a>
                                 {% else %}
-                                    <a href="{% url 'view_product' product.id %}" class="product-view"> view product</a>
+                                    <a href="{% url 'view_product' product.id %}" class="product-view"> Mahsulotni
+                                        ko'rish</a>
 
                                 {% endif %}
 

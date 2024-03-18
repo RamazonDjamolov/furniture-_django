@@ -30,6 +30,12 @@ def func_category(request):
     return categories
 
 
+def func_complect_category(request):
+    xonalar = Xonalar.objects.all()
+    print(xonalar, "XONALAR")
+    return xonalar
+
+
 def get_total_item(request):
     cart = request.session.get('cart', {})
     cart2 = request.session.get('cart2', {})
@@ -40,11 +46,13 @@ def get_total_item(request):
 
 def main(request):
     category = func_category(request)
+    xonalar = func_complect_category(request)
     total_item = get_total_item(request)
     prodct = Product.objects.all()[::4]
     return render(request, 'main.html', {
         'category': category,
         'total_item': total_item,
+        'xonalar': xonalar
 
     })
 
@@ -56,23 +64,26 @@ def product_category(request, id: int):
     products = Product.objects.all().filter(category_id=id).all()
     category = func_category(request)
     total_item = get_total_item(request)
+    xonalar = func_complect_category(request)
 
     return render(request, 'category.html', context={
         'products': products,
         'category': category,
+        'xonalar': xonalar,
         'total_item': total_item
     })
 
 
 def category_view(request):
     category = func_category(request)
+    xonalar = func_complect_category(request)
     products = Product.objects.all()
     total_item = get_total_item(request)
-
     return render(request, 'category.html', {
         'category': category,
         'products': products,
-        'total_item': total_item
+        'total_item': total_item,
+        'xonalar': xonalar,
 
     })
 
@@ -123,17 +134,19 @@ def add_to_cart_toplam(request, id: int):
 
 #  view product 👁👁👁👁👁
 def view_product(request, id: int):
+    xonalar = func_complect_category(request)
+
     category = func_category(request)
     product = Product.objects.get(id=id)
     total_item = get_total_item(request)
-    print(product.category, 'category')
     similarproducts = Product.objects.filter(category__name=str(product.category))
 
     return render(request, 'view_product.html', context={
         'category': category,
         'products': product,
         'total_item': total_item,
-        'similarproducts': similarproducts
+        'similarproducts': similarproducts,
+        'xonalar': xonalar,
     })
 
 
@@ -143,24 +156,29 @@ def toplam_pr_view(request, id):
     obj = Complect_product.objects.get(id=id)
     similar = Complect_product.objects.all()[::-1]
     category = func_category(request)
+    xonalar = func_complect_category(request)
 
     return render(request, template_name='toplarlar_pr_view.html', context={
         'total_item': total_item,
         'products': obj,
         'similarproducts': similar,
-        'category': category
+        'category': category,
+        'xonalar': xonalar
     })
 
 
 #  toplarlar pagenini viewsi
-def toplam_view(request):
+def toplam_view(request, id: int):
     total_item = get_total_item(request)
-    obj = Complect_product.objects.all()
+    obj = Complect_product.objects.all().filter(xonalar__id=id)
     category = func_category(request)
+    xonalar = func_complect_category(request)
+
     return render(request, template_name='toplamlar.html', context={
         'total_item': total_item,
         'products': obj,
-        'category': category
+        'category': category,
+        'xonalar': xonalar
     })
 
 
@@ -168,8 +186,18 @@ def toplam_view(request):
 def cart_view(request):
     category = func_category(request)
     total_item = get_total_item(request)
-    cart = request.session['cart']
-    cart2 = request.session['cart2']
+    xonlar = func_complect_category(request)
+    try:
+        cart = request.session['cart']
+        cart2 = request.session['cart2']
+    except KeyError:
+        w = request.session.get('cart', {})
+        w1 = request.session.get('cart2', {})
+        request.session['cart'] = w
+        request.session['cart2'] = w1
+        cart = request.session['cart']
+        cart2 = request.session['cart2']
+
     products = Product.objects.all().filter(id__in=cart.keys())
     toplam = Complect_product.objects.all().filter(id__in=cart2.keys())
     s = []
@@ -195,9 +223,11 @@ def cart_view(request):
         print(forms.is_valid())
         if forms.is_valid():
             email = forms.cleaned_data['email']
+            print(email, "dilferuz ")
             user = forms.cleaned_data['full_name']
             phone_number = forms.cleaned_data['phone_number']
             forms.save()
+
             send_email_task.delay(str(email))
             imgs = []
             for i in s:
@@ -206,7 +236,7 @@ def cart_view(request):
                 except:
                     imgs.append(i[0].product.first().img.first().img.url)
 
-            send_email_admin_task.delay(str(user), phone_number, [i[0].name for i in s], f"imgages == {imgs}" )
+            send_email_admin_task.delay(str(user), phone_number, [i[0].name for i in s], f"imgages == {imgs}")
 
             checkout(request)
             return redirect('cart')
@@ -217,7 +247,8 @@ def cart_view(request):
         'total_item': total_item,
         'products': s,
         'total_price': total_price,
-        'total_sale': total_sale
+        'total_sale': total_sale,
+        'xonalar': xonlar,
 
     })
 
@@ -284,6 +315,7 @@ def sub_top(request, id):
 def search(request):
     category = func_category(request)
     total_item = get_total_item(request)
+    xonalar = func_complect_category(request)
     if request.method == "GET":
         q = request.GET.get('q', '')
         s = []
@@ -300,5 +332,6 @@ def search(request):
         'products': s,
         'category': category,
         'total_item': total_item,
+        'xonalar': xonalar,
 
     })

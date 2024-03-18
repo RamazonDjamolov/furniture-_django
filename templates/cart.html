@@ -35,9 +35,9 @@
                                     <h3>{{ product.0.name|title }}</h3>
 
                                     <p>
-                                        length {{ product.0.length }} cm <br>
-                                        width {{ product.0.width }} cm <br>
-                                        height {{ product.0.height }} cm <br>
+                                        uzunligi {{ product.0.length }} cm <br>
+                                        eniga {{ product.0.width }} cm <br>
+                                        balandligi {{ product.0.height }} cm <br>
                                     </p>
 
                                     <h2>Price: {{ product.0.real_price|floatformat:0|intcomma }}</h2>
@@ -46,11 +46,11 @@
 
                             <div class="block_left">
                                 {% if product.0.img.first.img.url  == None %}
-                                    <a href="{% url 'delete_top' product.0.id %}" class="delete-btn"> delete <i
+                                    <a href="{% url 'delete_top' product.0.id %}" class="delete-btn"> O'chirish<i
                                             class="bi bi-x"></i></a>
 
                                 {% else %}
-                                    <a href="{% url 'delete' product.0.id %}" class="delete-btn"> delete <i
+                                    <a href="{% url 'delete' product.0.id %}" class="delete-btn"> O'chirish<i
                                             class="bi bi-x"></i></a>
 
                                 {% endif %}
@@ -90,7 +90,7 @@
                             </div>
 
                             <div class="block_left2">
-                                <p class="to_pr_price">total price: {{ product.2|floatformat:0|intcomma }}</p>
+                                <p class="to_pr_price"> {{ product.2|floatformat:0|intcomma }}</p>
                             </div>
                         </div>
                     </div>
@@ -101,7 +101,7 @@
 
 
             <div class="checkout-container">
-                <h1> Заполните информацию о себе </h1>
+                <h1 class="text-start "> O'zingiz haqingizda ma'lumotni to'ldiring</h1>
                 <div class="d-flex">
                     <form action="{% url 'cart' %}" id="formcha" method="post">
                         {% csrf_token %}
@@ -109,15 +109,15 @@
                         {{ forms|crispy }}
 
                         <button type="submit" id="myButton">
-                            chekout
+                            Buyurtma tasdiqlash
                         </button>
 
                     </form>
                     <div class="checkot ">
-                        <span>Скидка: <h4>{{ total_sale|floatformat:0|intcomma }} UZS</h4> </span>
+                        <span>Chegirma: <h4>{{ total_sale|floatformat:0|intcomma }} USD</h4> </span>
                         <hr>
-                        <p>Итого {{ total_item }} товар на сумму</p>
-                        <h4>total summa <br>{{ total_price | floatformat:0|intcomma }} UZS</h4>
+                        <p>Jami {{ total_item }} mahsulot miqdori uchun</p>
+                        <h4>{{ total_price | floatformat:0|intcomma }} USD</h4>
                     </div>
 
 

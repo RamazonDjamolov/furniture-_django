@@ -45,10 +45,6 @@ class img(models.Model):
         return self.img.url
 
 
-
-
-
-
 class Product(models.Model):
     name = models.CharField(max_length=300)
     description = RichTextUploadingField(verbose_name='description')
@@ -62,7 +58,6 @@ class Product(models.Model):
     img = models.ManyToManyField(img, related_name='product_img')
     created_at = models.DateTimeField(auto_now_add=True)
 
-
     def __str__(self):
         return self.name + ' ' + str(self.price)
 
@@ -72,6 +67,18 @@ class Product(models.Model):
         db_table = 'Product'
 
 
+class Xonalar(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Xona'
+        verbose_name_plural = 'Xonalar'
+        db_table = 'Xonalar'
+
+
 class Complect_product(models.Model):
     name = models.CharField(max_length=100)
     price = models.DecimalField(max_digits=30, decimal_places=3)
@@ -79,6 +86,7 @@ class Complect_product(models.Model):
     real_price = models.DecimalField(max_digits=30, decimal_places=3)
     product = models.ManyToManyField(Product, related_name='complect_product')
     created_at = models.DateTimeField(auto_now_add=True)
+    xonalar = models.ForeignKey(Xonalar, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
@@ -96,7 +104,7 @@ class Order(models.Model):
     adress = models.CharField(max_length=100)
 
     def __str__(self):
-        return  self.full_name
+        return self.full_name
 
     class Meta:
         verbose_name = 'Order'

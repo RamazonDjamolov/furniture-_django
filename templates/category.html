@@ -19,9 +19,8 @@
                 <div class="cart-container" >
                     <div class="my-cart" id="{{ product.id }}">
                         <div class="img">
-                            {% for img in product.img.all %}
-                                <img src="{{ img.img.url }}" alt="">
-                            {% endfor %}
+
+                            <img src="{{ product.img.first.img.url }}" alt="">
 
                         </div>
 
@@ -54,7 +53,7 @@
                                 <input type="text" hidden="hidden" value="{{ request.path }}#{{ product.id }}"
                                        name='next'>
                                 <button class="add_tocart ms-auto me-auto" type="submit">
-                                    add to cart
+                                     Savatga
                                 </button>
                             </form>
 
@@ -65,7 +64,7 @@
                             {#                                <input type="text" hidden="hidden" value="{{ request.path }}#{{ product.id }}"#}
                             {#                                       name='next'>#}
                             {#                            </a>#}
-                            <a href="{% url 'view_product' product.id %}" class="product-view"> view product</a>
+                            <a href="{% url 'view_product' product.id %}" class="product-view"> Mahsulotni ko'rish</a>
                         </div>
                     </div>
                 </div>
