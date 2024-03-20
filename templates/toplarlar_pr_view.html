@@ -13,6 +13,8 @@
 
     <link rel="stylesheet" href="{% static 'main/css/view_product.css' %}">
 
+    <link rel="stylesheet" href="{% static 'main/css/category.css' %}">
+
 {% endblock %}
 
 
@@ -35,10 +37,9 @@
                         {% for product in  products.product.all %}
                             {% for img in product.img.all %}
                                 <img src="{{ img.img.url }}" width="100%"
-                                 class="small-img small-img-view-product " alt="img"/>
+                                     class="small-img small-img-view-product " alt="img"/>
                             {% endfor %}
                         {% endfor %}
-
 
 
                     </div>
@@ -51,11 +52,11 @@
 
                 <h1>{{ products.name|title }}</h1>
                 <div class="price">
-{#                    <h4> {{ products.real_sale_price }}</h4>#}
+                    <h4> {{ products.real_sale_price }}</h4>
 
-                    <h4 class="text-danger">{{ products.real_sale_price|floatformat:0|intcomma }} UZS</h4>
+                    <h4 class="text-danger">{{ products.real_price|floatformat:0|intcomma }} USD</h4>
                     {% if products.sale_price == 0 or products.sale_price == None %}
-{##}
+                        {##}
                     {% else %}
                         <p>
                             <del class="text-decoration-line-through text-secondary">{{ products.price|floatformat:0|intcomma }} </del>
@@ -74,18 +75,19 @@
 
                     <input class="mt-3" type="number" values="1" min="1" max="99" name="quantity"/>
                     <button type="submit" class="add_tocart">
-                        <i class="bi bi-cart-plus-fill me-3" style="color: red"></i>  Savatga
+                        <i class="bi bi-cart-plus-fill me-3" style="color: red"></i> Savatga
                     </button>
 
                 </form>
-                <h3>Product Details <i class="fa fa-indent"></i></h3>
+                <h3>mashulot haqida batafsil <i class="fa fa-indent"></i></h3>
                 <br/>
                 <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet beatae blanditiis dolor
-                    exercitationem placeat quibusdam reprehenderit ut veritatis. Aliquid amet architecto aut commodi
-                    consequuntur, corporis cupiditate delectus doloribus eligendi error esse eveniet harum illum impedit
-                    ipsa ipsam laudantium necessitatibus neque nobis non quam qui quis quos repellat repellendus tenetur
-                    vitae!
+                    {% for product in products.product.all %}
+                        {{ product.description|safe }} uzunligi {{ product.length }} sm , eniga {{ product.width }} sm,
+                        ,balandligi {{ product.height }}
+                    {% endfor %}
+
+
                 </p>
             </div>
         </div>
@@ -102,41 +104,39 @@
                     <div class="my-cart" id="{{ product.id }}">
                         <div class="img">
 
-                                                       {% for product2 in  product.product.all %}
-                                {% for img in product2.img.all %}
-                                    <img src="{{ img.img.url }}" alt="">
-                                {% endfor %}
-                            {% endfor %}
-
+                            <a href="{% url 'toplam_view_pr' product.id %}">
+                                <img src="{{ product.product.first.img.first.img.url }}" alt="">
+                            </a>
 
                         </div>
 
-                        <div class="pr-title">
+                        <div class="pr-title ps-2">
                             <h5>{{ product.name }}</h5>
                         </div>
 
-                        <div class="price">
+                        <div class="price ps-2">
                             {% if product.sale_price == 0 and null %}
                                 <p>{{ product.real_price|floatformat:0|intcomma }}</p>
 
 
                             {% else %}
-                                <p class="mt-2 text-start"> {{ product.real_price|floatformat:3|intcomma }} UZS</p>
+                                <p class="mt-2 text-start"> {{ product.real_price|floatformat:0|intcomma }} UZS</p>
 
                             {% endif %}
                         </div>
 
                         <div class="form">
-                            <form action="{% url 'add' product.id %}" method="post">
+                            <form class="w-100  d-flex justify-content-center align-items-center"
+                                    action="{% url 'add' product.id %}" method="post">
                                 {% csrf_token %}
                                 <input type="text" hidden="hidden" value="{{ request.path }}#{{ product.id }}"
                                        name='next'>
                                 <button class="add_tocart" type="submit">
-                                    add to cart
+                                    Savatga
                                 </button>
                             </form>
 
-                            <a href="{% url 'view_product' product.id %}" class="product-view"> view product</a>
+                            <a href="{% url 'toplam_view_pr' product.id %}" class="product-view"> Mahsulotni ko'rish</a>
 
 
                         </div>

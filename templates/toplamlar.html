@@ -15,12 +15,9 @@
                 <div class="cart-container">
                     <div class="my-cart" id="{{ product.id }}">
                         <div class="img">
-                            {% for product2 in  product.product.all %}
-                                {% for img in product2.img.all %}
-                                    <img src="{{ img.img.url }}" alt="">
-                                {% endfor %}
-                            {% endfor %}
-
+                            <a href="{% url 'toplam_view_pr' product.id %}">
+                                <img src="{{ product.product.first.img.first.img.url }}" alt="">
+                            </a>
                         </div>
 
                         <div class="pr-title ps-3 mt-3">
@@ -34,8 +31,11 @@
 
 
                             {% else %}
-                                <p class="mt-2 text-start"> {{ product.real_price|floatformat:0|intcomma }} UZS</p>
-
+                                <p class=" text-start"> {{ product.real_price|floatformat:3|intcomma }} USD</p>
+                                <del>{{ product.price }}</del>
+                                <span>
+                                    <i class="bi bi-patch-check-fill text-success"> </i>{{ product.sale_price|floatformat:3|intcomma }}
+                                </span>
                             {% endif %}
 
                         </div>
@@ -52,7 +52,7 @@
                                     Savatga
                                 </button>
                             </form>
-                            <a href="{% url 'toplam_view_pr' product.id %}" class="product-view">  Mahsulotni ko'rish</a>
+                            <a href="{% url 'toplam_view_pr' product.id %}" class="product-view"> Mahsulotni ko'rish</a>
                         </div>
                     </div>
                 </div>

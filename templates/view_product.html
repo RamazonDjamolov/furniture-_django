@@ -50,7 +50,7 @@
                 <h1>{{ products.name|title }}</h1>
                 <div class="price">
 
-                    <h4 class="text-danger">{{ products.real_price|floatformat:0|intcomma }} UZS</h4>
+                    <h4 class="text-danger">{{ products.real_price|floatformat:0|intcomma }} USD</h4>
                     {% if products.sale_price == 0 or products.sale_price == None %}
 
                     {% else %}
@@ -75,10 +75,13 @@
                     </button>
 
                 </form>
-                <h3>Product Details <i class="fa fa-indent"></i></h3>
+                <h3>Mahsulot haqida batafsil<i class="fa fa-indent"></i></h3>
                 <br/>
                 <p>
-                    {{ products.description.system_check_deprecated_details }}
+                    balandligi {{ products.height }}sm <br>
+                    eni {{ products.width }}sm <br>
+                    uzunligi {{ products.length }}sm <br>
+                    {{ products.description|safe }}
                 </p>
             </div>
         </div>
@@ -87,7 +90,7 @@
     </div>
 
     <div class="container">
-        <h1>Similar Products</h1>
+        <h1>O'hshash mahsulotlar </h1>
         <div class="block">
 
             {% for product in similarproducts %}
@@ -110,7 +113,7 @@
 
 
                             {% else %}
-                                <p class="mt-2 text-start"> {{ product.real_price|floatformat:3|intcomma }} UZS</p>
+                                <p class="mt-2 text-start"> {{ product.real_price|floatformat:3|intcomma }} USD</p>
 
                             {% endif %}
                         </div>
@@ -125,7 +128,7 @@
                                 </button>
                             </form>
 
-                            <a href="{% url 'view_product' product.id %}" class="product-view">  Mahsulotni ko'rish</a>
+                            <a href="{% url 'view_product' product.id %}" class="product-view"> Mahsulotni ko'rish</a>
 
 
                         </div>
