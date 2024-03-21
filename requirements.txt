@@ -15,13 +15,14 @@ defusedxml==0.7.1
 Django==5.0.2
 django-address==0.2.8
 django-allauth==0.61.1
-django-ckeditor==6.7.1
+django-ckeditor-5==0.2.12
 django-crispy-forms==2.1
 django-jazzmin==2.6.0
 django-js-asset==2.2.0
 djangorestframework==3.14.0
 idna==3.6
 kombu==5.3.5
+mysqlclient==2.2.4
 oauthlib==3.2.2
 phonenumbers==8.13.31
 pillow==10.2.0

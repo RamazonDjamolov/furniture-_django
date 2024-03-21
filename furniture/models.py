@@ -1,10 +1,10 @@
 from datetime import timezone
 
-from ckeditor_uploader.fields import RichTextUploadingField
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.core.exceptions import ValidationError
 import phonenumbers
+from django_ckeditor_5.fields import CKEditor5Field
 
 
 def validate_phone_number(value):
@@ -47,7 +47,7 @@ class img(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=300)
-    description = RichTextUploadingField(verbose_name='description')
+    description = CKEditor5Field('Text', config_name='extends')
     height = models.PositiveIntegerField(default=0)
     length = models.PositiveIntegerField(default=0)
     width = models.PositiveIntegerField(default=0)

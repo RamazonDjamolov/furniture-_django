@@ -16,12 +16,13 @@
 
 
 
-                <div class="cart-container" >
+                <div class="cart-container">
                     <div class="my-cart" id="{{ product.id }}">
                         <div class="img">
 
-
-                            <img src="{{ product.img.first.img.url }}" alt="">
+                            <a href="{% url 'view_product' product.id %}">
+                                <img src="{{ product.img.first.img.url }}" alt="">
+                            </a>
 
                         </div>
 
@@ -54,17 +55,10 @@
                                 <input type="text" hidden="hidden" value="{{ request.path }}#{{ product.id }}"
                                        name='next'>
                                 <button class="add_tocart ms-auto me-auto" type="submit">
-                                     Savatga
+                                    Savatga
                                 </button>
                             </form>
 
-
-                            {#                            <a href="" class="add_tocart" >#}
-                            {#                                <i class="bi {% if check %} bi-cart-x-fill#}
-                            {#                               {% endif %} bi-cart-plus" style="color: white"> add to cart </i>#}
-                            {#                                <input type="text" hidden="hidden" value="{{ request.path }}#{{ product.id }}"#}
-                            {#                                       name='next'>#}
-                            {#                            </a>#}
                             <a href="{% url 'view_product' product.id %}" class="product-view"> Mahsulotni ko'rish</a>
                         </div>
                     </div>

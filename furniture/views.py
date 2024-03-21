@@ -110,12 +110,28 @@ def add_to_cart(request, id: int):
     return redirect(x)
 
 
+def add_to_cart2(request, id: int):
+    cart = request.session.get('cart', {})
+    if request.method == "POST":
+        qu = request.POST['quantity']
+
+        try:
+            cart.update({f'{id}': int(qu)})
+        except:
+            cart.update({f'{id}': int(1)})
+
+    request.session['cart'] = cart
+    try:
+        x = request.POST['next']
+    except MultiValueDictKeyError as e:
+        return redirect('/' + f'#{id}')
+    return redirect(x)
+
+
 #  add toplamlar
 def add_to_cart_toplam(request, id: int):
     print(id)
     cart2 = request.session.get('cart2', {})
-    # print(cart2, "cart2")
-    # cart2.clear()
     print(str(id) in cart2.keys())
     if str(id) in cart2.keys():
         cart2.pop(f"{id}")
@@ -123,8 +139,30 @@ def add_to_cart_toplam(request, id: int):
         cart2[f'{id}'] = 1
 
     request.session['cart2'] = cart2
-    print(request.session['cart2'], 'cart2')
-    x = request.POST['next']
+    try:
+        x = request.POST['next']
+    except MultiValueDictKeyError as e:
+        return redirect('/' + f'#{id}')
+    return redirect(x)
+
+
+def add_to_cart_toplam2(request, id: int):
+    cart2 = request.session.get('cart2', {})
+
+    if request.method == "POST":
+        qu = request.POST['quantity']
+        s = cart2.get(str(id))
+        print(id, 'product_ctoplam_category2  id', 'qunatity == ', qu)
+        try:
+            if str(id) in cart2.keys():
+                cart2.update({f'{id}': s + int(qu)})
+            else:
+                cart2[f'{id}'] = int(qu)
+
+        except:
+            cart2[f'{id}'] = 1
+
+    request.session['cart2'] = cart2
     try:
         x = request.POST['next']
     except MultiValueDictKeyError as e:
@@ -137,7 +175,10 @@ def view_product(request, id: int):
     xonalar = func_complect_category(request)
 
     category = func_category(request)
-    product = Product.objects.get(id=id)
+    try:
+        product = Product.objects.get(id=id)
+    except:
+        return redirect('main')
     total_item = get_total_item(request)
     similarproducts = Product.objects.filter(category__name=str(product.category))
 
@@ -153,7 +194,10 @@ def view_product(request, id: int):
 # toplar view 👀👀👀👀👀
 def toplam_pr_view(request, id):
     total_item = get_total_item(request)
-    obj = Complect_product.objects.get(id=id)
+    try:
+        obj = Complect_product.objects.get(id=id)
+    except:
+        return redirect('main')
     similar = Complect_product.objects.all()[::-1]
     category = func_category(request)
     xonalar = func_complect_category(request)
@@ -253,6 +297,7 @@ def cart_view(request):
     })
 
 
+#  cart + - delete m
 def add(request, id):
     x = request.GET.get('next', '/')
     cart = request.session.get('cart', {})
