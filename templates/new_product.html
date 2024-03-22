@@ -1,0 +1,79 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'main/css/category.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container" style="margin: 80px auto;">
+        <div class="block">
+
+
+            {% for product in products %}
+
+
+
+
+                <div class="cart-container">
+                    <div class="my-cart" id="{{ product.id }}">
+                        <div class="img">
+
+                            <a href="{% url 'view_product' product.id %}">
+                                <img src="{{ product.img.first.img.url }}" alt="">
+                            </a>
+
+                        </div>
+
+                        <div class="pr-title ps-3 mt-3">
+                            {{ product.name|title }}
+                        </div>
+                        <hr>
+
+                        <div class="price ps-3">
+                            {% if product.sale_price == 0 or product.sale_price == None %}
+                                <p>{{ product.real_price|floatformat:0|intcomma }}</p>
+
+                            {% else %}
+                                <p class=""> {{ product.real_price|floatformat:0|intcomma }} USD</p>
+                                <del>  {{ product.price }}</del>
+                                <span>
+                                <i class="bi bi-patch-check-fill text-success">{{ product.sale_price }} </i>
+                                </span>
+
+                            {% endif %}
+
+                        </div>
+
+                        <div class="form ">
+
+
+                            <form class="w-100  d-flex justify-content-center align-items-center"
+                                  action="{% url 'add' product.id %}" method="post">
+                                {% csrf_token %}
+                                <input type="text" hidden="hidden" value="{{ request.path }}#{{ product.id }}"
+                                       name='next'>
+                                <button class="add_tocart ms-auto me-auto" type="submit">
+                                    Savatga
+                                </button>
+                            </form>
+
+                            <a href="{% url 'view_product' product.id %}" class="product-view"> Mahsulotni ko'rish</a>
+                        </div>
+                    </div>
+                </div>
+
+            {% endfor %}
+
+
+        </div>
+
+
+    </div>
+
+
+{% endblock %}
+
+
+

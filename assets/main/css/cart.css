@@ -132,5 +132,52 @@
 .body .checkout-container .d-flex form button:hover {
   background-color: black;
 }
+.body .checkout-container .d-flex form .checkot2 {
+  display: none;
+}
+@media (max-width: 991px) {
+  .cart-container {
+    width: auto !important;
+  }
+  .checkout-container {
+    width: auto !important;
+    height: 200% !important;
+    padding: 50px 50px !important;
+  }
+  .d-flex {
+    display: flex;
+    gap: 60px;
+    height: auto !important;
+  }
+  .d-flex form {
+    width: 500px !important;
+  }
+  .d-flex form button {
+    width: 300px;
+    padding: 10px 40px;
+    text-align: center;
+    background-color: #404040;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 0px;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 6px;
+    border: none;
+    transition: 0.7s ease;
+  }
+  .d-flex form button:hover {
+    background-color: black;
+  }
+  .d-flex form .checkot2 {
+    display: block !important;
+  }
+  .d-flex .checkot {
+    display: block;
+  }
+  .checkot {
+    display: none !important;
+  }
+}
 
 /*# sourceMappingURL=cart.css.map */

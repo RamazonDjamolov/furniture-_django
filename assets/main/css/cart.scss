@@ -46,7 +46,6 @@
           }
 
 
-
           @keyframes rotate {
             0% {
               transform: rotate(0deg);
@@ -138,12 +137,13 @@
 
     h1 {
       font-size: 35px;
-      margin-bottom: 100px ;
+      margin-bottom: 100px;
     }
 
     .d-flex {
       display: flex;
       gap: 60px;
+
       form {
         width: 700px;
 
@@ -167,14 +167,82 @@
           }
 
         }
+
+        .checkot2 {
+          display: none;
+
+        }
       }
 
       .checkot {
       }
+
     }
 
   }
 }
 
+
+@media (max-width: 991px) {
+  .cart-container {
+    width: auto !important;
+
+  }
+
+  .checkout-container {
+    width: auto !important;
+    height: 200% !important;
+    padding: 50px 50px !important;
+
+  }
+
+  .d-flex {
+    display: flex;
+    gap: 60px;
+    height: auto !important;
+
+    form {
+      width: 500px !important;
+
+      button {
+        width: 300px;
+        padding: 10px 40px;
+        text-align: center;
+        background-color: #404040;;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 0px;
+        cursor: pointer;
+        text-align: center;
+        border-radius: 6px;
+        border: none;
+
+        transition: 0.7s ease;
+
+        &:hover {
+          background-color: black;
+        }
+
+      }
+
+      .checkot2 {
+        display: block !important;
+
+      }
+    }
+
+    .checkot {
+      display: block;
+    }
+
+  }
+
+
+  .checkot {
+    display: none !important;
+  }
+
+
+}
 
 

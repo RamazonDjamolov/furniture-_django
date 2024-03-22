@@ -1,5 +1,6 @@
 {% extends 'layouts/base.html' %}
 {% load static %}
+{% load humanize %}
 
 
 {% block extra_css %}
@@ -56,105 +57,57 @@
     <div class="container" style="margin: 80px auto;">
         <h1> Yangi mahsulotlar katalogi</h1>
         <div class="block">
+            {% for product in products %}
+                <div class="cart-container">
+                    <div class="my-cart">
+                        <div class="img">
+                            < <a href="{% url 'view_product' product.id %}">
+                            <img src="{{ product.img.first.img.url }}" alt="">
+                        </a>
+                        </div>
 
+                        <div class="pr-title">
+                            {{ product.name|title }}
+                        </div>
 
-            <div class="cart-container">
-                <div class="my-cart">
-                    <div class="img">
-                        <img src="{% static 'main/img/car2.jpg' %}" alt="">
-                    </div>
+                        <div class="price">
 
-                    <div class="pr-title">
-                        name
-                    </div>
+                            {% if product.sale_price == 0 or product.sale_price == None %}
+                                <p>{{ product.real_price|floatformat:0|intcomma }}</p>
 
-                    <div class="price">
-                        <p>558$</p>
-                        <del>700$</del>
-                        <span><i class="bi bi-patch-check-fill"> 20%</i> </span>
-                    </div>
+                            {% else %}
+                                <p class=""> {{ product.real_price|floatformat:0|intcomma }} USD</p>
+                                <del>  {{ product.price }}</del>
+                                <span>
+                                <i class="bi bi-patch-check-fill text-success">{{ product.sale_price }} </i>
+                                </span>
 
-                    <div class="form">
-                        <a href="" class="add_tocart"> Savatga</a>
-                        <a href="" class="product-view"><p> Mahsulotni ko'rish</p></a>
-                    </div>
-                </div>
-            </div>
+                            {% endif %}
+                        </div>
 
-            <div class="cart-container">
-                <div class="my-cart">
-                    <div class="img">
-                        <img src="{% static 'main/img/car2.jpg' %}" alt="">
-                    </div>
+                        <div class="form">
+                            <form class="w-100  d-flex justify-content-center align-items-center"
+                                  action="{% url 'add' product.id %}" method="post">
+                                {% csrf_token %}
+                                <input type="text" hidden="hidden" value="{{ request.path }}#{{ product.id }}"
+                                       name='next'>
+                                <button class="add_tocart ms-auto me-auto" type="submit">
+                                    Savatga
+                                </button>
+                            </form>
 
-                    <div class="pr-title">
-                        name
-                    </div>
-
-                    <div class="price">
-                        <p>558$</p>
-                        <del>700$</del>
-                        <span><i class="bi bi-patch-check-fill"> 20%</i> </span>
-                    </div>
-
-                    <div class="form">
-                        <a href="" class="add_tocart"> Savatga</a>
-                        <a href="" class="product-view"><p> Mahsulotni ko'rish</p></a>
+                            <a href="{% url 'view_product' product.id %}" class="product-view"> Mahsulotni ko'rish</a>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="cart-container">
-                <div class="my-cart">
-                    <div class="img">
-                        <img src="{% static 'main/img/car2.jpg' %}" alt="">
-                    </div>
-
-                    <div class="pr-title">
-                        name
-                    </div>
-
-                    <div class="price">
-                        <p>558$</p>
-                        <del>700$</del>
-                        <span><i class="bi bi-patch-check-fill"> 20%</i> </span>
-                    </div>
-
-                    <div class="form">
-                        <a href="" class="add_tocart"> Savatga</a>
-                        <a href="" class="product-view"><p> Mahsulotni ko'rish</p></a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="cart-container">
-                <div class="my-cart">
-                    <div class="img">
-                        <img src="{% static 'main/img/car2.jpg' %}" alt="">
-                    </div>
-
-                    <div class="pr-title">
-                        name
-                    </div>
-
-                    <div class="price">
-                        <p>558$</p>
-                        <del>700$</del>
-                        <span><i class="bi bi-patch-check-fill"> 20%</i> </span>
-                    </div>
-
-                    <div class="form">
-                        <a href="" class="add_tocart"> Savatga</a>
-                        <a href="" class="product-view"><p> Mahsulotni ko'rish</p></a>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
 
 
         </div>
 
         <div class="text-center">
-            <form action="" class="text-center">
+            <form action="{% url 'new_product' %}" class="text-center">
                 <button type="submit" role="button" class="button-63 text-center">
                     Ko'proq
                 </button>
@@ -175,31 +128,31 @@
             <div class="interyer col-8 mb-3">
                 <div class="hoverable">
                     <img class="hoverable__img" src="{% static 'main/img/box-1.jpg' %}" alt="">
-                    <a class="hover__btn" href="">Hover me</a>
+                    <a class="hover__btn" href="">Balkon</a>
                 </div>
             </div>
             <div class="interyer col-4 mb-3">
                 <div class="hoverable">
                     <img class="hoverable__img" src="{% static 'main/img/box-2 .jpg' %}" alt="">
-                    <a class="hover__btn" href="">Hover me</a>
+                    <a class="hover__btn" href="">Oshxona </a>
                 </div>
             </div>
             <div class="interyer col-4">
                 <div class="hoverable">
                     <img class="hoverable__img" src="{% static 'main/img/box-3.jpg' %}" alt="">
-                    <a class="hover__btn" href="">Hover me</a>
+                    <a class="hover__btn" href="">Mehmanxona</a>
                 </div>
             </div>
             <div class="interyer col-4">
                 <div class="hoverable">
                     <img class="hoverable__img" src="{% static 'main/img/box-4.jpg' %}" alt="">
-                    <a class="hover__btn" href="">Hover me</a>
+                    <a class="hover__btn" href="{% url 'products_main' 'div' %}">Yushoq Mebelar</a>
                 </div>
             </div>
             <div class="interyer col-4">
                 <div class="hoverable">
                     <img class="hoverable__img" src="{% static 'main/img/box-5.jpg' %}" alt="">
-                    <a class="hover__btn" href="">Hover me</a>
+                    <a class="hover__btn" href="">Sanuzel</a>
                 </div>
             </div>
 
@@ -215,8 +168,8 @@
                     <img src="{% static 'main/img/clock-regular.svg' %}" class="ustunlig-img" alt="">
 
                 </div>
-                <h3 class="mb-5 text-center">365-DAY HOME TRIAL</h3>
-                <p class="p">Our unique return policy will allow you to return furniture for almost a year</p>
+                <h3 class="mb-5 text-center"> 1 YIL DAVOMIDA 365 KUN ISHLIMIZ</h3>
+                <p class="p text-center">365 kun davomida aloqada bo'lamiz</p>
 
 
             </div>
@@ -227,8 +180,9 @@
                     <img src="{% static 'main/img/truck-solid.svg' %}" class="ustunlig-img" alt="">
 
                 </div>
-                <h3 class="mb-5 text-center">FREE SHIPPING AND DELIVERY</h3>
-                <p class="mb-5">We're one of the few furniture online retailers, who offer delivery free of charge</p>
+                <h3 class="mb-5 text-center">BEPUL YETQIZIB BERISH HIZMATI</h3>
+                <p class="mb-5 text-center">Tashkent viloyati va tashkent shaxri bo'yicha tekinga yetiqizb berish
+                    hizmati</p>
 
 
             </div>
@@ -238,8 +192,8 @@
                 <div class="icon text-center mb-5">
                     <img src="{% static 'main/img/medal-solid.svg' %}" class="ustunlig-img" alt="">
                 </div>
-                <h3 class="mb-5 text-center">LIFETIME WARRANTY</h3>
-                <p class="mb-5">Purchasing furniture at Quali comes with longer warranty than anyone else offers!</p>
+                <h3 class="mb-5 text-center">A'LO SIFAT</h3>
+                <p class="mb-5 text-center">Faqat eng sifatlilari bizda</p>
 
 
             </div>

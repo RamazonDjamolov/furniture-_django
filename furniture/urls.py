@@ -20,5 +20,8 @@ urlpatterns = [
     path('sub_top/<str:id>/', sub_top, name='sub_top'),
     path('delete_top/<str:id>/', delete_top, name='delete_top'),
     path('search/', search, name='search'),
+    path('new_product', new_product, name='new_product'),
+    path('products_main/<str:name>/', products_main, name="products_main")
+    # path('404', handler404, )
 
 ]

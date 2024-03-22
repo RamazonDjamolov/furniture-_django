@@ -90,7 +90,7 @@
                             </div>
 
                             <div class="block_left2">
-                                <p class="to_pr_price"> {{ product.2|floatformat:0|intcomma }}</p>
+                                <p class="to_pr_price"> {{ product.2|floatformat:0|intcomma }} USD</p>
                             </div>
                         </div>
                     </div>
@@ -108,12 +108,21 @@
 
                         {{ forms|crispy }}
 
+
+                        <div class="checkot2">
+                            <span>Chegirma: <h4>{{ total_sale|floatformat:0|intcomma }} USD</h4> </span>
+                            <hr>
+                            <p>Jami {{ total_item }} mahsulot miqdori uchun</p>
+                            <h4>{{ total_price | floatformat:0|intcomma }} USD</h4>
+
+                        </div>
+
                         <button type="submit" id="myButton">
                             Buyurtma tasdiqlash
                         </button>
 
                     </form>
-                    <div class="checkot ">
+                    <div class="checkot">
                         <span>Chegirma: <h4>{{ total_sale|floatformat:0|intcomma }} USD</h4> </span>
                         <hr>
                         <p>Jami {{ total_item }} mahsulot miqdori uchun</p>

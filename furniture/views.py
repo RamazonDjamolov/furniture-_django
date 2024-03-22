@@ -52,7 +52,8 @@ def main(request):
     return render(request, 'main.html', {
         'category': category,
         'total_item': total_item,
-        'xonalar': xonalar
+        'xonalar': xonalar,
+        'products': prodct
 
     })
 
@@ -72,6 +73,46 @@ def product_category(request, id: int):
         'xonalar': xonalar,
         'total_item': total_item
     })
+
+
+def new_product(request):
+    category = func_category(request)
+    xonalar = func_complect_category(request)
+    try:
+        products = Product.objects.all()[::20]
+    except:
+        products = Product.objects.all()
+    total_item = get_total_item(request)
+    return render(request, 'category.html', {
+        'category': category,
+        'products': products,
+        'total_item': total_item,
+        'xonalar': xonalar,
+
+    })
+
+
+def products_main(request, name):
+    total_item = get_total_item(request)
+    category = func_category(request)
+    xonalar = func_complect_category(request)
+    try:
+        obj = Complect_product.objects.all().filter(xonalar__name=name)
+        return render(request, 'toplamlar.html', context={
+            'total_item': total_item,
+            'products': obj,
+            'category': category,
+            'xonalar': xonalar
+        })
+    except:
+        obj = Product.objects.all().filter(category__name=name)
+        return render(request, 'category.html', {
+            'total_item': total_item,
+            'products': obj,
+            'category': category,
+            'xonalar': xonalar
+        })
+        print(obj, "obj 2222222")
 
 
 def category_view(request):

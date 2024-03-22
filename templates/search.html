@@ -63,14 +63,6 @@
                                 </button>
                                 </form>
 
-
-                                {#                            <a href="" class="add_tocart" >#}
-                                {#                                <i class="bi {% if check %} bi-cart-x-fill#}
-                                {#                               {% endif %} bi-cart-plus" style="color: white"> add to cart </i>#}
-                                {#                                <input type="text" hidden="hidden" value="{{ request.path }}#{{ product.id }}"#}
-                                {#                                       name='next'>#}
-                                {#                            </a>#}
-
                                 {% if product.img.all == None %}
                                     <a href="{% url 'toplam_view_pr' product.id %}" class="product-view"> v Mahsulotni
                                         ko'rish</a>
@@ -86,7 +78,17 @@
 
                 {% endfor %}
 
-            {% else %} <h1> salom</h1>
+            {% else %}
+                <div class="page-wrap d-flex flex-row align-items-center">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 text-center">
+                                <span class="display-1 d-block">SIZ IZLAGAN MAHSULOT MAVJUD EMAS !</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             {% endif %}
 
 
