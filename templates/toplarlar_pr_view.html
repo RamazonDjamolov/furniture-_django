@@ -106,8 +106,8 @@
                     <div class="my-cart" id="{{ product.id }}">
                         <div class="img">
 
-                            <a href="{% url 'toplam_view_pr' product.id %}">
-                                <img src="{{ product.product.first.img.first.img.url }}" alt="">
+                            <a href="{% url 'toplam_view_pr' product.id %}" class="w-100">
+                                <img src="{{ product.product.first.img.first.img.url }}" alt="" class="w-100">
                             </a>
 
                         </div>
