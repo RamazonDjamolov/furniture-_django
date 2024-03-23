@@ -15,15 +15,14 @@
                     <div class="cart-container">
                         <div class="my-cart" id="{{ product.id }}">
                             <div class="img">
-                                {% for img in product.img.all %}
-                                    <img src="{{ img.img.url }}" alt="">
-                                {% endfor %}
+                                <a href="{% url 'view_product' product.id %}">
+                                    <img src="{{ product.img.first.img.url }}" alt="">
+                                </a>
 
-                                {% for product2 in  product.product.all %}
-                                    {% for img in product2.img.all %}
-                                        <img src="{{ img.img.url }}" alt="">
-                                    {% endfor %}
-                                {% endfor %}
+                                <a href="{% url 'toplam_view_pr' product.id %}">
+                                    <img src="{{ product.product.first.img.first.img.url }}" alt="">
+                                </a>
+
                             </div>
 
                             <div class="pr-title ps-3 mt-3">
