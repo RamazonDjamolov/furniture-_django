@@ -48,7 +48,9 @@ def main(request):
     category = func_category(request)
     xonalar = func_complect_category(request)
     total_item = get_total_item(request)
-    prodct = Product.objects.all()[::4]
+    prodct = Product.objects.all()[:4]
+    for prod in prodct:
+        print(prod, "mahsulotlar")
     return render(request, 'main.html', {
         'category': category,
         'total_item': total_item,

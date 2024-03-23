@@ -20,8 +20,8 @@
                     <div class="my-cart" id="{{ product.id }}">
                         <div class="img">
 
-                            <a href="{% url 'view_product' product.id %}">
-                                <img src="{{ product.img.first.img.url }}" alt="">
+                            <a href="{% url 'view_product' product.id %}" class="w-100">
+                                <img src="{{ product.img.first.img.url }}" alt="" class="w-100">
                             </a>
 
                         </div>

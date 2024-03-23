@@ -66,11 +66,12 @@
                             </a>
                         </div>
 
-                        <div class="pr-title">
+                        <div class="pr-title ps-3 mt-3">
                             {{ product.name|title }}
+                            <hr>
                         </div>
 
-                        <div class="price">
+                        <div class="price ps-3">
 
                             {% if product.sale_price == 0 or product.sale_price == None %}
                                 <p>{{ product.real_price|floatformat:0|intcomma }}</p>

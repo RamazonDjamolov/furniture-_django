@@ -45,9 +45,20 @@
 .container .block .my-cart .img {
   width: 100%;
 }
+.container .block .my-cart .img::-webkit-scrollbar {
+  height: 2px;
+}
+.container .block .my-cart .img::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 15px #686868;
+  outline: black;
+}
+.container .block .my-cart .img::-webkit-scrollbar-thumb {
+  background-color: black;
+  outline: none;
+}
 .container .block .my-cart .img img {
   width: 100%;
-  height: auto;
+  height: 250px;
   border-radius: 10px;
 }
 .container .block .my-cart .price {
