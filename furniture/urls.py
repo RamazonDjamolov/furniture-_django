@@ -4,9 +4,9 @@ from .views import *
 urlpatterns = [
     path('', main, name='main'),
     path('category/', category_view, name='category'),
-    path('toplamlar/<int:id>/', toplam_view, name='toplam'),
+    path('toplamlar/<str:name>/', toplam_view, name='toplam'),
     path('toplamlar_view_pr/<int:id>/', toplam_pr_view, name='toplam_view_pr'),
-    path('category/<int:id>/', product_category, name='product_category'),
+    path('category/<str:name>/', product_category, name='product_category'),
     path('view_product/<int:id>/', view_product, name='view_product'),
     path('cart/', cart_view, name='cart'),
     path('add_to_cart/<int:id>/', add_to_cart, name='add'),
@@ -21,7 +21,7 @@ urlpatterns = [
     path('delete_top/<str:id>/', delete_top, name='delete_top'),
     path('search/', search, name='search'),
     path('new_product', new_product, name='new_product'),
-    path('products_main/<str:name>/', products_main, name="products_main")
+    # path('products_main/<str:name>/', products_main, name="products_main")
     # path('404', handler404, )
 
 ]

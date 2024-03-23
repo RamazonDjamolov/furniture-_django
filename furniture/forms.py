@@ -13,16 +13,20 @@ class CheckoutForm(forms.ModelForm):
 
         widgets = {
             'full_name': forms.TextInput(attrs=
-                                         {'class': 'full_name_input', 'placeholder': 'full name'}),
+                                         {'class': 'full_name_input',
+                                          'placeholder': 'Palonchi Pistonchi Pistonchiyev',
+                                          'label': "To'lliq ism sharifiz"
+                                          }),
 
             'phone_number': forms.TextInput(attrs=
-                                            {'class': 'phone_number_input', 'placeholder': '+9989x xxx xx xx'}),
+                                            {'class': 'phone_number_input', 'placeholder': '+9989x xxx xx xx',
+                                             'label': "telefon raqamingiz"
+                                             }),
 
             'email': forms.EmailInput(
-                attrs={'class': 'email_input', 'placeholder': 'exam@example.com'}),
+                attrs={'class': 'email_input', 'placeholder': 'example@gmail.com'}),
 
             'adress': forms.TextInput(
                 attrs={'class': 'full_name_input', 'placeholder': 'Tshkent city , biromod, home 28 '}),
 
         }
-

@@ -61,8 +61,14 @@ def main(request):
 # categoriyaga tegishli bolgan hamma narsalarni boshlanishi
 
 
-def product_category(request, id: int):
-    products = Product.objects.all().filter(category_id=id).all()
+def product_category(request, name):
+    try:
+        products = Product.objects.filter(Q(category_id=name)).all()
+    except:
+        try:
+            products = Product.objects.filter(Q(category__name__icontains=name)).all()
+        except:
+            pass
     category = func_category(request)
     total_item = get_total_item(request)
     xonalar = func_complect_category(request)
@@ -253,9 +259,17 @@ def toplam_pr_view(request, id):
 
 
 #  toplarlar pagenini viewsi
-def toplam_view(request, id: int):
+def toplam_view(request, name):
+    print(name, "toplam name v")
     total_item = get_total_item(request)
-    obj = Complect_product.objects.all().filter(xonalar__id=id)
+    try:
+        obj = Complect_product.objects.all().filter(xonalar__id=name)
+    except:
+        try:
+            obj = Complect_product.objects.all().filter(xonalar__name__icontains=name)
+        except:
+            pass
+
     category = func_category(request)
     xonalar = func_complect_category(request)
 
@@ -324,7 +338,7 @@ def cart_view(request):
             send_email_admin_task.delay(str(user), phone_number, [i[0].name for i in s], f"imgages == {imgs}")
 
             checkout(request)
-            return redirect('cart')
+            return redirect('main')
 
     return render(request, 'cart.html', context={
         'forms': forms,

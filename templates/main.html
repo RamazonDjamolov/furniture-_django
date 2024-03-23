@@ -61,9 +61,9 @@
                 <div class="cart-container">
                     <div class="my-cart">
                         <div class="img">
-                            < <a href="{% url 'view_product' product.id %}">
-                            <img src="{{ product.img.first.img.url }}" alt="">
-                        </a>
+                            <a href="{% url 'view_product' product.id %}">
+                                <img src="{{ product.img.first.img.url }}" alt="">
+                            </a>
                         </div>
 
                         <div class="pr-title">
@@ -128,31 +128,31 @@
             <div class="interyer col-8 mb-3">
                 <div class="hoverable">
                     <img class="hoverable__img" src="{% static 'main/img/box-1.jpg' %}" alt="">
-                    <a class="hover__btn" href="">Balkon</a>
+                    <a class="hover__btn" href="{% url 'product_category' 'balko' %}">Balkon</a>
                 </div>
             </div>
             <div class="interyer col-4 mb-3">
                 <div class="hoverable">
                     <img class="hoverable__img" src="{% static 'main/img/box-2 .jpg' %}" alt="">
-                    <a class="hover__btn" href="">Oshxona </a>
+                    <a class="hover__btn" href="{% url 'toplam'  "oshxon" %}">Oshxona </a>
                 </div>
             </div>
             <div class="interyer col-4">
                 <div class="hoverable">
                     <img class="hoverable__img" src="{% static 'main/img/box-3.jpg' %}" alt="">
-                    <a class="hover__btn" href="">Mehmanxona</a>
+                    <a class="hover__btn" href="{% url 'toplam'  "mehmon" %}">Mehmonxona</a>
                 </div>
             </div>
             <div class="interyer col-4">
                 <div class="hoverable">
                     <img class="hoverable__img" src="{% static 'main/img/box-4.jpg' %}" alt="">
-                    <a class="hover__btn" href="{% url 'products_main' 'div' %}">Yushoq Mebelar</a>
+                    <a class="hover__btn" href="{% url 'product_category' 'yumshoq mebe' %}">Yushoq Mebelar</a>
                 </div>
             </div>
             <div class="interyer col-4">
                 <div class="hoverable">
                     <img class="hoverable__img" src="{% static 'main/img/box-5.jpg' %}" alt="">
-                    <a class="hover__btn" href="">Sanuzel</a>
+                    <a class="hover__btn" href="{% url 'toplam'  "sanuze" %}">Sanuzel</a>
                 </div>
             </div>
 
