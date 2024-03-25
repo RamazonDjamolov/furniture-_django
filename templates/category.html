@@ -3,7 +3,7 @@
 {% load humanize %}
 
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static 'main/css/category.css' %}">
+    <link rel="stylesheet" href="{% static 'main/css/main.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -33,10 +33,10 @@
 
                         <div class="price ps-3">
                             {% if product.sale_price == 0 or product.sale_price == None %}
-                                <p>{{ product.real_price|floatformat:0|intcomma }}</p>
+                                <p>{{ product.real_price|intcomma }}</p>
 
                             {% else %}
-                                <p class=""> {{ product.real_price|floatformat:0|intcomma }} USD</p>
+                                <p class=""> {{ product.real_price|intcomma }} USD</p>
                                 <del>  {{ product.price }}</del>
                                 <span>
                                 <i class="bi bi-patch-check-fill text-success">{{ product.sale_price }} </i>

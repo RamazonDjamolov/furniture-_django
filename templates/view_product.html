@@ -13,7 +13,8 @@
 
     <link rel="stylesheet" href="{% static 'main/css/view_product.css' %}">
 
-    <link rel="stylesheet" href="{% static 'main/css/category.css' %}">
+    <link rel="stylesheet" href="{% static 'main/css/main.css' %}">
+
 
 {% endblock %}
 
@@ -52,15 +53,15 @@
                 <h1>{{ products.name|title }}</h1>
                 <div class="price">
 
-                    <h4 class="text-danger">{{ products.real_price|floatformat:0|intcomma }} USD</h4>
+                    <h4 class="text-danger">{{ products.real_price|intcomma }} USD</h4>
                     {% if products.sale_price == 0 or products.sale_price == None %}
 
                     {% else %}
                         <p>
-                            <del class="text-decoration-line-through text-secondary">{{ products.price|floatformat:0|intcomma }} </del>
+                            <del class="text-decoration-line-through text-secondary">{{ products.price|intcomma }} </del>
                         </p>
                         <p>
-                            <i class="bi bi-patch-check-fill text-success"> </i>{{ products.sale_price|floatformat:0|intcomma }}
+                            <i class="bi bi-patch-check-fill text-success"> </i>{{ products.sale_price|intcomma }}
                         </p>
 
                     {% endif %}
@@ -112,12 +113,15 @@
                         </div>
 
                         <div class="price ps-2">
-                            {% if product.sale_price == 0 and null %}
-                                <p>{{ product.real_price|floatformat:0|intcomma }}</p>
-
+                            {% if product.sale_price == 0 or product.sale_price == None %}
+                                <p>{{ product.real_price|intcomma }}</p>
 
                             {% else %}
-                                <p class="mt-2 text-start"> {{ product.real_price|floatformat:3|intcomma }} USD</p>
+                                <p class="mb-0"> {{ product.real_price|intcomma }} USD</p>
+                                <del>  {{ product.price }}</del>
+                                <span>
+                                <i class="bi bi-patch-check-fill text-success">{{ product.sale_price }} </i>
+                                </span>
 
                             {% endif %}
                         </div>

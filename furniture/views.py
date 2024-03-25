@@ -87,13 +87,13 @@ def new_product(request):
     category = func_category(request)
     xonalar = func_complect_category(request)
     try:
-        products = Product.objects.all()[::20]
+        products = Product.objects.all()[::-1]
     except:
         products = Product.objects.all()
     total_item = get_total_item(request)
     return render(request, 'category.html', {
         'category': category,
-        'products': products,
+        'products': products[:20],
         'total_item': total_item,
         'xonalar': xonalar,
 

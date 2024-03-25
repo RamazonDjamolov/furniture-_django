@@ -40,7 +40,7 @@
                                         balandligi {{ product.0.height }} cm <br>
                                     </p>
 
-                                    <h2>Price: {{ product.0.real_price|floatformat:0|intcomma }}</h2>
+                                    <h2>Price: {{ product.0.real_price|intcomma }}</h2>
                                 </div>
                             </div>
 
@@ -90,7 +90,7 @@
                             </div>
 
                             <div class="block_left2">
-                                <p class="to_pr_price"> {{ product.2|floatformat:0|intcomma }} USD</p>
+                                <p class="to_pr_price"> {{ product.2|intcomma }} USD</p>
                             </div>
                         </div>
                     </div>
@@ -110,10 +110,10 @@
 
 
                         <div class="checkot2">
-                            <span>Chegirma: <h4>{{ total_sale|floatformat:0|intcomma }} USD</h4> </span>
+                            <span>Chegirma: <h4>{{ total_sale|intcomma }} USD</h4> </span>
                             <hr>
                             <p>Jami {{ total_item }} mahsulot miqdori uchun</p>
-                            <h4>{{ total_price | floatformat:0|intcomma }} USD</h4>
+                            <h4>{{ total_price|intcomma }} USD</h4>
 
                         </div>
 
@@ -123,10 +123,10 @@
 
                     </form>
                     <div class="checkot">
-                        <span>Chegirma: <h4>{{ total_sale|floatformat:0|intcomma }} USD</h4> </span>
+                        <span>Chegirma: <h4>{{ total_sale|intcomma }} USD</h4> </span>
                         <hr>
                         <p>Jami {{ total_item }} mahsulot miqdori uchun</p>
-                        <h4>{{ total_price | floatformat:0|intcomma }} USD</h4>
+                        <h4>{{ total_price|intcomma }} USD</h4>
                     </div>
 
 

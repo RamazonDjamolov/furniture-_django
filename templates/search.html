@@ -3,8 +3,13 @@
 {% load humanize %}
 
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static 'main/css/category.css' %}">
+    {#    <link rel="stylesheet" href="{% static 'main/css/category.css' %}">#}
+
+    <link rel="stylesheet" href="{% static 'main/css/main.css' %}">
+
 {% endblock %}
+
+
 
 {% block content %}
     <div class="container" style="margin: 80px auto;">
@@ -15,13 +20,18 @@
                     <div class="cart-container">
                         <div class="my-cart" id="{{ product.id }}">
                             <div class="img">
-                                <a href="{% url 'view_product' product.id %}" class="w-100">
-                                    <img src="{{ product.img.first.img.url }}" alt="" class="w-100">
-                                </a>
 
-                                <a href="{% url 'toplam_view_pr' product.id %}" class="w-100">
-                                    <img src="{{ product.product.first.img.first.img.url }}" alt="" class="w-100">
-                                </a>
+
+                                {% if product.img.first.img.url  == None %}
+                                    <a href="{% url 'toplam_view_pr' product.id %}" class="w-100">
+                                        <img src="{{ product.product.first.img.first.img.url }}" alt=""
+                                             class="w-100">
+                                    </a>
+                                {% else %}
+                                    <a href="{% url 'view_product' product.id %}" class="w-100">
+                                        <img src="{{ product.img.first.img.url }}" alt="" class="w-100">
+                                    </a>
+                                {% endif %}
 
                             </div>
 
@@ -31,16 +41,21 @@
                             <hr>
 
                             <div class="price ps-3">
-                                {% if product.sale_price == 0 and null %}
-                                    <p>{{ product.real_price|floatformat:0|intcomma }}</p>
-
+                                {% if product.sale_price == 0 or product.sale_price == None %}
+                                    <p>{{ product.real_price|intcomma }}</p>
 
                                 {% else %}
-                                    <p class="mt-2 text-start"> {{ product.real_price|floatformat:0|intcomma }} USD</p>
+                                    <p class="mb-0"> {{ product.real_price|intcomma }} USD</p>
+                                    <del>  {{ product.price }}</del>
+                                    <span>
+                                <i class="bi bi-patch-check-fill text-success">{{ product.sale_price }} </i>
+                                </span>
 
                                 {% endif %}
 
+
                             </div>
+
 
                             <div class="form ">
 
@@ -63,7 +78,7 @@
                                 </form>
 
                                 {% if product.img.all == None %}
-                                    <a href="{% url 'toplam_view_pr' product.id %}" class="product-view"> v Mahsulotni
+                                    <a href="{% url 'toplam_view_pr' product.id %}" class="product-view"> Mahsulotni
                                         ko'rish</a>
                                 {% else %}
                                     <a href="{% url 'view_product' product.id %}" class="product-view"> Mahsulotni

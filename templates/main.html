@@ -74,10 +74,10 @@
                         <div class="price ps-3">
 
                             {% if product.sale_price == 0 or product.sale_price == None %}
-                                <p>{{ product.real_price|floatformat:0|intcomma }}</p>
+                                <p>{{ product.real_price|intcomma }}</p>
 
                             {% else %}
-                                <p class=""> {{ product.real_price|floatformat:0|intcomma }} USD</p>
+                                <p class=""> {{ product.real_price|intcomma }} USD</p>
                                 <del>  {{ product.price }}</del>
                                 <span>
                                 <i class="bi bi-patch-check-fill text-success">{{ product.sale_price }} </i>
@@ -87,7 +87,7 @@
                         </div>
 
                         <div class="form">
-                            <form class="w-100  d-flex justify-content-center align-items-center"
+                            <form class="w-100  d-flex justify-content-center align-items-center "
                                   action="{% url 'add' product.id %}" method="post">
                                 {% csrf_token %}
                                 <input type="text" hidden="hidden" value="{{ request.path }}#{{ product.id }}"

@@ -13,7 +13,8 @@
 
     <link rel="stylesheet" href="{% static 'main/css/view_product.css' %}">
 
-    <link rel="stylesheet" href="{% static 'main/css/category.css' %}">
+    <link rel="stylesheet" href="{% static 'main/css/main.css' %}">
+
 
 {% endblock %}
 
@@ -54,15 +55,15 @@
                 <div class="price">
                     <h4> {{ products.real_sale_price }}</h4>
 
-                    <h4 class="text-danger">{{ products.real_price|floatformat:0|intcomma }} USD</h4>
+                    <h4 class="text-danger">{{ products.real_price|intcomma }} USD</h4>
                     {% if products.sale_price == 0 or products.sale_price == None %}
                         {##}
                     {% else %}
                         <p>
-                            <del class="text-decoration-line-through text-secondary">{{ products.price|floatformat:0|intcomma }} </del>
+                            <del class="text-decoration-line-through text-secondary">{{ products.price|intcomma }} </del>
                         </p>
                         <p>
-                            <i class="bi bi-patch-check-fill text-success"> </i>{{ products.sale_price|floatformat:0|intcomma }}
+                            <i class="bi bi-patch-check-fill text-success"> </i>{{ products.sale_price|intcomma }}
                         </p>
 
                     {% endif %}
@@ -75,7 +76,7 @@
 
                     <input class="mt-3" type="number" values="1" min="1" max="99" name="quantity"/>
                     <input type="text" hidden="hidden" value="{{ request.path }}#{{ product.id }}"
-                                       name='next'>
+                           name='next'>
                     <button type="submit" class="add_tocart">
                         <i class="bi bi-cart-plus-fill me-3" style="color: red"></i> Savatga
                     </button>
@@ -98,7 +99,7 @@
     </div>
 
     <div class="container">
-        <h1>Similar Products</h1>
+        <h1>O'hshash mahsulotlar </h1>
         <div class="block">
 
             {% for product in similarproducts %}
@@ -117,19 +118,22 @@
                         </div>
 
                         <div class="price ps-2">
-                            {% if product.sale_price == 0 and null %}
-                                <p>{{ product.real_price|floatformat:0|intcomma }}</p>
-
+                            {% if product.sale_price == 0 or product.sale_price == None %}
+                                <p>{{ product.real_price|intcomma }}</p>
 
                             {% else %}
-                                <p class="mt-2 text-start"> {{ product.real_price|floatformat:0|intcomma }} UZS</p>
+                                <p class="mb-0"> {{ product.real_price|intcomma }} USD</p>
+                                <del>  {{ product.price }}</del>
+                                <span>
+                                <i class="bi bi-patch-check-fill text-success">{{ product.sale_price }} </i>
+                                </span>
 
                             {% endif %}
                         </div>
 
                         <div class="form">
                             <form class="w-100  d-flex justify-content-center align-items-center"
-                                    action="{% url 'add' product.id %}" method="post">
+                                  action="{% url 'add' product.id %}" method="post">
                                 {% csrf_token %}
                                 <input type="text" hidden="hidden" value="{{ request.path }}#{{ product.id }}"
                                        name='next'>
